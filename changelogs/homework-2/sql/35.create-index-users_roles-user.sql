@@ -1,0 +1,1 @@
+create index users_roles_user_id on users_roles(user_id);

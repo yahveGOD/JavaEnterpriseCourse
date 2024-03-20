@@ -1,0 +1,1 @@
+create index talent_tree_hero_id on talant_tree(hero_id);

@@ -1,0 +1,1 @@
+create index inventory_items_item_id on inventory_items(item_id);

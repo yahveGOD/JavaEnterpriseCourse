@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<databaseChangeLog
+   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro 
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd"
+      logicalFilePath="homework-2">  
+    
+    <changeSet id="homework-2-role" author="Ilya Savinsky">
+        <sqlFile encoding="utf8" path="./sql/01.create-role-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+	
+	<changeSet id="homework-2-hero" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/02.create-hero-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+		<changeSet id="homework-2-talant_tree" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/15.create-talant_tree-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+			<changeSet id="homework-2-ability" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/12.create-ability-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-item" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/11.create-item-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-inventory" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/07.create-inventory-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-items_in_inventory" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/03.create-inventory_items-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-game_mode" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/04.create-game_mode-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-match" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/14.create-match-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-user" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/10.create-user-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-statistics" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/05.create-statistics-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-user_roles" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/06.create-users_roles-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-matches_history" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/08.create-matches_history-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-replay" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/09.create-replay-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-picked_hero" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/13.create-picked_hero-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+
+
+	<changeSet id="homework-2-create-index-item_in_inventory-item" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/33.create-index-item_in_inventory-item.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-hero-ability" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/31.create-index-hero-ability.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-hero-talent" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/32.create-index-hero-talent.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+
+	<changeSet id="homework-2-create-index-item_in_inventory-inventory" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/34.create-index-items_in_inventory-inventory.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-users_roles-user" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/35.create-index-users_roles-user.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-users_roles-role" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/36.create-index-users_roles-role.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-matches_history-match" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/37.create-index-matches_history-match.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-matches_history-user" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/38.create-index-matches_history-user.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-replay-match" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/39.create-index-replay-match.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-picked_hero-hero" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/40.create-index-picked_hero-hero.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-picked_hero-match" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/41.create-index-picked_hero-match.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-picked_hero-user" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/42.create-index-picked_hero-user.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-picked_hero-statistics" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/43.create-index-picked_hero-statistics.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-picked_hero-inventorys" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/44.create-index-picked_hero-inventory.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-create-index-match-game_mode" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/45.create-index-match-game_mode.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-insert-role" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/16.insert-role-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-insert-game_mode" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/18.insert-game_mode-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-statistics" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/20.insert-statistics-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-inventory" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/22.insert-inventory-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-user" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/25.insert-user-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-item" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/26.insert-item-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-hero" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/17.insert-hero-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-insert-talant_tree" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/30.insert-talant_tree-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	
+	<changeSet id="homework-2-insert-ability" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/27.insert-ability-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-items_in_inventory" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/19.insert-items_in_inventory-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-users_roles" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/21.insert-users_roles-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+	
+	<changeSet id="homework-2-insert-match" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/29.insert-match-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-matches_history" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/23.insert-matches_history-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-replay" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/24.insert-replay-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+	<changeSet id="homework-2-insert-picked_hero" author="Ilya Savinsky">
+		<sqlFile encoding="utf8" path="./sql/28.insert-picked_hero-table.sql" relativeToChangelogFile="true"/>
+	</changeSet>
+
+</databaseChangeLog> 
