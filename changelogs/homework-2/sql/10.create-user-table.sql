@@ -4,5 +4,5 @@ create table "user"(
     password varchar(64) not null,
     steam_api_key varchar(255) not null,
     description varchar(64) not null,
-    mmr smallint not null
+    average_matchmaking_rating smallint not null
 );
