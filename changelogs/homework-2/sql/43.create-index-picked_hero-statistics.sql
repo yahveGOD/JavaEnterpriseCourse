@@ -1,0 +1,1 @@
+create index picked_hero_statistics_id on picked_hero(statistics_id);

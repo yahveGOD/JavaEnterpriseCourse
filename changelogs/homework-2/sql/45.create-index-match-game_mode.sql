@@ -1,0 +1,1 @@
+create index match_game_mode_id on match(game_mode_id);
