@@ -13,16 +13,15 @@
         <sqlFile encoding="utf8" path="./sql/01.create-role-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
-	
 	<changeSet id="homework-2-hero" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/02.create-hero-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
 	
-		<changeSet id="homework-2-talant_tree" author="Ilya Savinsky">
+	<changeSet id="homework-2-talant_tree" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/15.create-talant_tree-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
 	
-			<changeSet id="homework-2-ability" author="Ilya Savinsky">
+	<changeSet id="homework-2-ability" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/12.create-ability-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
 
@@ -70,8 +69,6 @@
 		<sqlFile encoding="utf8" path="./sql/13.create-picked_hero-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
 
-
-
 	<changeSet id="homework-2-create-index-item_in_inventory-item" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/33.create-index-item_in_inventory-item.sql" relativeToChangelogFile="true"/>
 	</changeSet>
@@ -83,7 +80,6 @@
 	<changeSet id="homework-2-create-index-hero-talent" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/32.create-index-hero-talent.sql" relativeToChangelogFile="true"/>
 	</changeSet>
-
 
 	<changeSet id="homework-2-create-index-item_in_inventory-inventory" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/34.create-index-items_in_inventory-inventory.sql" relativeToChangelogFile="true"/>
@@ -165,7 +161,6 @@
 		<sqlFile encoding="utf8" path="./sql/30.insert-talant_tree-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
 
-	
 	<changeSet id="homework-2-insert-ability" author="Ilya Savinsky">
 		<sqlFile encoding="utf8" path="./sql/27.insert-ability-table.sql" relativeToChangelogFile="true"/>
 	</changeSet>
