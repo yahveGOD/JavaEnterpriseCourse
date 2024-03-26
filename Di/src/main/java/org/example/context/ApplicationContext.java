@@ -8,7 +8,7 @@ import org.example.factory.ObjectFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+@Component
 public class ApplicationContext {
     @Setter
     private ObjectFactory factory;
