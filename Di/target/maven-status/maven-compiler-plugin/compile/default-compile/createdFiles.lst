@@ -1,0 +1,16 @@
+org\example\config\JavaConfig.class
+org\example\Recommendator.class
+org\example\AnnouncerImpl.class
+org\example\annotations\Value.class
+org\example\factory\ObjectFactory.class
+org\example\BadChecker.class
+org\example\config\Config.class
+org\example\Music.class
+org\example\Checker.class
+org\example\config\ObjectConfigurator.class
+org\example\RecommendatorImpl.class
+org\example\DefaultChecker.class
+org\example\Main.class
+org\example\Player.class
+org\example\config\ValueAnnotationObjectConfigurator.class
+org\example\Announcer.class
