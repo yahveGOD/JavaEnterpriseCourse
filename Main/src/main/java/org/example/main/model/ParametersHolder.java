@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.main.model;
 import lombok.Getter;
 import org.example.annotations.Component;
 import org.example.annotations.Value;

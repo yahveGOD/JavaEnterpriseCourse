@@ -1,10 +1,9 @@
-package org.example.service.impl;
+package org.example.main.service.impl;
 
-import lombok.Setter;
 import org.example.annotations.AutoWire;
 import org.example.annotations.Component;
-import org.example.repository.DatabaseInterface;
-import org.example.service.ServiceInterface;
+import org.example.main.repository.DatabaseInterface;
+import org.example.main.service.ServiceInterface;
 @Component
 public class ServiceInterfaceImpl implements ServiceInterface {
 

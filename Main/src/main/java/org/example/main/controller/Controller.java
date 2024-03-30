@@ -1,8 +1,8 @@
-package org.example.controller;
+package org.example.main.controller;
 
 import org.example.annotations.AutoWire;
 import org.example.annotations.Component;
-import org.example.service.ServiceInterface;
+import org.example.main.service.ServiceInterface;
 
 @Component
 public class Controller {

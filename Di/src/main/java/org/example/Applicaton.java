@@ -10,11 +10,10 @@ import java.util.Map;
 public class Applicaton {
     public static ApplicationContext run(String packageToScan)
     {
-        JavaConfig config = new JavaConfig(packageToScan, new HashMap<Class, Class>());
-            ApplicationContext context = new ApplicationContext(config);
-            ObjectFactory factory = new ObjectFactory(context);
-            context.setFactory(factory);
+            JavaConfig config = new JavaConfig(packageToScan);
+            ApplicationContext context = ApplicationContext.newApplicationContext();
+            ObjectFactory factory = new ObjectFactory(config,packageToScan);
+            context.setCache(factory.getMap());
             return context;
-
     }
 }

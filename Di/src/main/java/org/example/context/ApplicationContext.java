@@ -11,32 +11,24 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ApplicationContext {
     @Setter
-    private ObjectFactory factory;
     private Map<Class,Object> cache = new ConcurrentHashMap<>();
-    @Getter
-    private Config config;
 
-    public ApplicationContext(Config config) {
-
-        this.config = config;
-    }
-
-    public <T> T getObject(Class<T> type)
+    private static ApplicationContext context;
+    public static ApplicationContext newApplicationContext()
     {
-        if(cache.containsKey(type))
+        if(context == null)
         {
-            T t = (T) cache.get(type);
-            return t;
+            context = new ApplicationContext();
         }
-        Class<? extends T> implClass = type;
-        if (type.isInterface()) {
-            implClass = config.getImplClass(type);
-        }
-        T t = factory.createObject(implClass);
-        if(implClass.isAnnotationPresent(Component.class))
-        {
-            cache.put(type,t);
-        }
-        return t;
+        return context;
+
     }
+    private ApplicationContext() {
+
+    }
+
+    public <T> T getObject(Class<T> type) {
+        return (T) cache.get(type);
+    }
+
 }

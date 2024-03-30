@@ -21,7 +21,7 @@ public class ValueAnnotationObjectConfigurator implements ObjectConfigurator {
 
     @SneakyThrows
     public ValueAnnotationObjectConfigurator() {
-        URL resource = ClassLoader.getSystemClassLoader().getResource("application.properties");
+        URL resource = ClassLoader.getSystemClassLoader().getResource("org/example/application.properties");
         File file = Paths.get(resource.toURI()).toFile();
         String absolutePath = file.getAbsolutePath();
         Stream<String> lines = new BufferedReader(new FileReader(absolutePath)).lines();
@@ -30,7 +30,7 @@ public class ValueAnnotationObjectConfigurator implements ObjectConfigurator {
 
     @Override
     @SneakyThrows
-    public void configure(Object t, ApplicationContext context) {
+    public void configure(Object t, Map<Class,Object> map) {
         Class<?> implClass = t.getClass();
         for (Field field : implClass.getDeclaredFields()) {
             Value annotation = field.getAnnotation(Value.class);

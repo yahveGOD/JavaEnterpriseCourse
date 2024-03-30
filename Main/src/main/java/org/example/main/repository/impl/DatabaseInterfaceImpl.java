@@ -1,9 +1,9 @@
-package org.example.repository.impl;
+package org.example.main.repository.impl;
 
 import org.example.annotations.AutoWire;
 import org.example.annotations.Component;
-import org.example.model.ParametersHolder;
-import org.example.repository.DatabaseInterface;
+import org.example.main.model.ParametersHolder;
+import org.example.main.repository.DatabaseInterface;
 @Component
 public class DatabaseInterfaceImpl implements DatabaseInterface {
     @AutoWire
