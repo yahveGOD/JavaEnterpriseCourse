@@ -1,2 +1,2 @@
-INSERT INTO "user" (name,password,steam_api_key,description,mmr) VALUES ('ProPlayer','zxc112','https://steamcommunity.com/id/carloooooooo/','Plays for Team Liquid',9800);
-INSERT INTO "user" (name,password,steam_api_key,description,mmr) VALUES ('ProPlayer1','qwetry','https://steamcommunity.com/id/19berna74/','Default dota 2 player',7600);
+INSERT INTO "user" (name,password,steam_api_key,description,average_matchmaking_rating) VALUES ('ProPlayer','zxc112','https://steamcommunity.com/id/carloooooooo/','Plays for Team Liquid',9800);
+INSERT INTO "user" (name,password,steam_api_key,description,average_matchmaking_rating) VALUES ('ProPlayer1','qwetry','https://steamcommunity.com/id/19berna74/','Default dota 2 player',7600);
