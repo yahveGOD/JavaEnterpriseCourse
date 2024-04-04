@@ -14,6 +14,23 @@ import java.util.List;
 public class PickedHeroRepository {
 
     private static List<PickedHero> pickedHeroList;
+    public PickedHeroRepository()
+    {
+        save(PickedHero.builder()
+                .hero(new Hero("123",0.5f,0.4f,1,1,1,1))
+                .inventory(new Inventory(0.5f))
+                .match(new Match(Duration.ofHours(0).plusMinutes(30).plusSeconds(45),"zxc",new GameMode("zxc","cc",true,11),10,10))
+                .statistics(new Statistics(1,1,1,1))
+                .user(new User("1","2","3","4",1341))
+                .build());
+        save(PickedHero.builder()
+                .hero(new Hero("zxc",0.1f,0.1f,111,111,111,221))
+                .inventory(new Inventory(0.1f))
+                .match(new Match(Duration.ofHours(0).plusMinutes(30).plusSeconds(45),"Team",new GameMode("alter","qwerty",true,11),13,12))
+                .statistics(new Statistics(3,1,5,7))
+                .user(new User("11","12","33","44",1341))
+                .build());
+    }
     public PickedHero findByMatchAndHero(Match match, Hero hero)
     {
 
