@@ -7,15 +7,22 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class UserRepository {
-    @Getter
-    private List<User> userList;
+public class UserRepository extends AbstractRepository<User>{
     public UserRepository()
     {
-        userList = new ArrayList<>();
-        User user1 = new User(0,"zxc","@@@","zxczxczx","123",2500);
-        User user2 = new User(1,"mansdn","llkn","zxczxczx","11233",7000);
-        userList.add(user1);
-        userList.add(user2);
+        save(User.builder()
+                .name("zxc")
+                .averageMatchmakingRating(11111)
+                .description("123")
+                .password("@")
+                .steamApiKey("zxc")
+                .build());
+        save(User.builder()
+                .name("qqq")
+                .averageMatchmakingRating(1222)
+                .description("zzz")
+                .password("@")
+                .steamApiKey("zqqq")
+                .build());
     }
 }

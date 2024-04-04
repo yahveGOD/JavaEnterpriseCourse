@@ -3,19 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.AbilityDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
+import org.example.main.dto.ability.AbilityDto;
+import org.example.main.dto.ability.AbilityDtoMapper;
 import org.example.main.entity.Ability;
 import org.example.main.service.AbilityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/ability")
 @RequiredArgsConstructor
 public class AbilityController {
@@ -26,7 +24,6 @@ public class AbilityController {
     public void create(@RequestBody AbilityDto abilityDto) {
         abilityService.addAbility(abilityDto);
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
         abilityService.deleteAbility(id);
@@ -43,7 +40,6 @@ public class AbilityController {
         return abilityService.FindAllAbilities();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(abilityService.FindAllAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
@@ -56,5 +52,4 @@ public class AbilityController {
     private String serializeToJson(List<Ability> abilities) throws JsonProcessingException {
         return objectMapper.writeValueAsString(abilities);
     }
-
 }

@@ -6,15 +6,11 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class InventoryRepository {
-    @Getter
-    private List<Inventory> inventories;
+public class InventoryRepository extends AbstractRepository<Inventory>{
 
     public InventoryRepository() {
-        inventories = new ArrayList<>();
-        Inventory inventory1 = new Inventory(0,0.5F);
-        Inventory inventory2 = new Inventory(1,0.3F);
-        inventories.add(inventory1);
-        inventories.add(inventory2);
+        save(Inventory.builder()
+                .buildEffectivity(0.5f)
+                .build());
     }
 }

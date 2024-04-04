@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.InventoryDto;
-import org.example.main.dto.ItemDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.ItemDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.item.ItemDto;
+import org.example.main.dto.item.ItemDtoMapper;
 import org.example.main.entity.Item;
-import org.example.main.service.InventoryService;
 import org.example.main.service.ItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/item")
 @RequiredArgsConstructor
 public class ItemController {
@@ -45,7 +40,7 @@ public class ItemController {
         return itemService.FindAllItems();
     }
 
-    @GetMapping("/serialize")
+
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(itemService.FindAllItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());

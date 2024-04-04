@@ -3,21 +3,19 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.MatchDto;
-import org.example.main.dto.PickedHeroDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.PickedHeroDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.pickedHero.PickedHeroDto;
+import org.example.main.dto.pickedHero.PickedHeroDtoMapper;
+import org.example.main.entity.Hero;
+import org.example.main.entity.Match;
 import org.example.main.entity.PickedHero;
 import org.example.main.service.PickedHeroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/picked_hero")
 @RequiredArgsConstructor
 public class PickedHeroController {
@@ -35,8 +33,8 @@ public class PickedHeroController {
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, @RequestBody PickedHeroDto pickedHeroDto) {
-        pickedHeroService.pickedHeroEditUpdate(id, pickedHeroDto);
+    public void editUpdate(@PathVariable(value = "id")Match match, Hero hero, @RequestBody PickedHeroDto pickedHeroDto) {
+        pickedHeroService.pickedHeroEditUpdate(hero,match, pickedHeroDto);
     }
 
     @GetMapping("/all")
@@ -44,7 +42,6 @@ public class PickedHeroController {
         return pickedHeroService.FindAllPickedHeroes();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(pickedHeroService.FindAllPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());

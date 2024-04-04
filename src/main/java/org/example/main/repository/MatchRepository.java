@@ -10,17 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MatchRepository {
-    private GameModeRepository gmp = new GameModeRepository();
-    @Getter
-    private List<Match> matchList;
+public class MatchRepository extends AbstractRepository<Match>{
 
     public MatchRepository() {
-        matchList = new ArrayList<>();
-        Match match1 = new Match(0, Duration.ofHours(0).plusMinutes(30).plusSeconds(45),"Lol",gmp.getGameModeList().get(0),100,150);
-
-        Match match2 = new Match(1, Duration.ofHours(1).plusMinutes(30).plusSeconds(45),"Lolzxc",gmp.getGameModeList().get(0),255,471);
-        matchList.add(match1);
-        matchList.add(match2);
+        save(Match.builder()
+                .direKills(123)
+                .duration(Duration.ofHours(0).plusMinutes(30).plusSeconds(45))
+                .radiantKills(123)
+                .victorySide("zxc")
+                .build());
+        save(Match.builder()
+                .direKills(555)
+                .duration(Duration.ofHours(0).plusMinutes(30).plusSeconds(45))
+                .radiantKills(666)
+                .victorySide("qwe")
+                .build());
     }
 }

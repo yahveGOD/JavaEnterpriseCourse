@@ -1,16 +1,18 @@
 package org.example.main.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Duration;
-import java.time.LocalTime;
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Match {
-    private long id;
+public class Match extends BaseEntity {
     private Duration duration;
     private String victorySide;
     private GameMode gameMode;

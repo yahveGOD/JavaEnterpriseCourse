@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.HeroDto;
-import org.example.main.dto.InventoryDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.InventoryDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.inventory.InventoryDto;
+import org.example.main.dto.inventory.InventoryDtoMapper;
 import org.example.main.entity.Inventory;
-import org.example.main.service.HeroService;
 import org.example.main.service.InventoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
@@ -45,7 +40,6 @@ public class InventoryController {
         return inventoryService.FindAllInventories();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(inventoryService.FindAllInventories().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());

@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.StatisticsDto;
-import org.example.main.dto.TalentTreeDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.TalentTreeDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.talentTree.TalentTreeDto;
+import org.example.main.dto.talentTree.TalentTreeDtoMapper;
 import org.example.main.entity.TalentTree;
-import org.example.main.service.StatisticsService;
 import org.example.main.service.TalentTreeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/talent_tree")
 @RequiredArgsConstructor
 public class TalentTreeController {
@@ -45,7 +40,6 @@ public class TalentTreeController {
         return talentTreeService.FindAllTrees();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(talentTreeService.FindAllTrees().stream().map(TalentTreeDtoMapper::convertDtoToEntity).toList());

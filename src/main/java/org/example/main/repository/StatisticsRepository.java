@@ -9,16 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class StatisticsRepository {
-    @Getter
-    private List<Statistics> statisticsList;
+public class StatisticsRepository extends AbstractRepository<Statistics> {
 
     public StatisticsRepository()
     {
-        statisticsList = new ArrayList<>();
-        Statistics statistics1 = new Statistics(0,10,20,1,5000);
-        Statistics statistics2 = new Statistics(1,15,4,8,1500);
-        statisticsList.add(statistics1);
-        statisticsList.add(statistics2);
+        save(Statistics.builder()
+                .assists(123)
+                .deaths(123)
+                .kills(123)
+                .networth(1111111)
+                .build());
+        save(Statistics.builder()
+                .assists(111)
+                .deaths(111)
+                .kills(111)
+                .networth(333333)
+                .build());
     }
 }

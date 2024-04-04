@@ -8,15 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class HeroRepository {
-    @Getter
-    private List<Hero> heroes;
+public class HeroRepository extends AbstractRepository<Hero> {
 
     public HeroRepository() {
-        heroes = new ArrayList<>();
-        Hero hero1 = new Hero(0,"op",0.4F,0.6F,1400,20,20,20);
-        Hero hero2 = new Hero(1,"ozxc",0.4F,0.6F,1500,26,27,29);
-        heroes.add(hero1);
-        heroes.add(hero2);
+        save(Hero.builder()
+                .winRate(0.35f)
+                .strength(24)
+                .pickRate(0.5f)
+                .pickedTimes(15000)
+                .name("pudge")
+                .intelligence(5)
+                .agility(15)
+                .build());
+        save(Hero.builder()
+                .winRate(0.77f)
+                .strength(55)
+                .pickRate(0.11f)
+                .pickedTimes(55555)
+                .name("wr")
+                .intelligence(5)
+                .agility(15)
+                .build());
     }
 }

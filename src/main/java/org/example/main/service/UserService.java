@@ -1,45 +1,39 @@
 package org.example.main.service;
 
-import org.example.main.dto.StatisticsDto;
-import org.example.main.dto.TalentTreeDto;
-import org.example.main.dto.UserDto;
-import org.example.main.dto.mapper.HeroDtoMapper;
-import org.example.main.dto.mapper.StatisticsDtoMapper;
-import org.example.main.dto.mapper.TalentTreeDtoMapper;
-import org.example.main.dto.mapper.UserDtoMapper;
-import org.example.main.entity.TalentTree;
+import lombok.RequiredArgsConstructor;
+import org.example.main.dto.user.UserDto;
+import org.example.main.dto.user.UserDtoMapper;
 import org.example.main.entity.User;
 import org.example.main.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     public List<UserDto> FindAllUsers() {
-        return userRepository.getUserList().stream().map(UserDtoMapper::convertEntityToDto).toList();
+        return userRepository.findAll().stream().map(UserDtoMapper::convertEntityToDto).toList();
     }
 
     public void deleteUser(int idInList) {
-        userRepository.getUserList().remove(idInList);
+        userRepository.deleteById(idInList);
     }
 
     public void userEditUpdate(int idInList, UserDto userDto) {
-        User user = userRepository.getUserList().get(idInList);
-        user.setId(userDto.getUuid());
+        User user = userRepository.findById(idInList);
+
         user.setName(userDto.getName());
         user.setDescription(userDto.getDescription());
         user.setPassword(userDto.getPassword());
         user.setSteamApiKey(userDto.getSteamApiKey());
         user.setAverageMatchmakingRating(userDto.getAverageMatchmakingRating());
-        userRepository.getUserList().set(idInList, user);
+
+        userRepository.save(user);
     }
 
     public void addUser(UserDto userDto) {
-        userRepository.getUserList().add(UserDtoMapper.convertDtoToEntity(userDto));
+        userRepository.save(UserDtoMapper.convertDtoToEntity(userDto));
     }
 }

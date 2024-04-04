@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.ItemDto;
-import org.example.main.dto.MatchDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.MatchDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.match.MatchDto;
+import org.example.main.dto.match.MatchDtoMapper;
 import org.example.main.entity.Match;
-import org.example.main.service.ItemService;
 import org.example.main.service.MatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/match")
 @RequiredArgsConstructor
 public class MatchController {
@@ -45,7 +40,6 @@ public class MatchController {
         return matchService.FindAllMatches();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(matchService.FindAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());

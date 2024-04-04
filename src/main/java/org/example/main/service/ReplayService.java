@@ -1,10 +1,10 @@
 package org.example.main.service;
 
-import org.example.main.dto.MatchDto;
-import org.example.main.dto.PickedHeroDto;
-import org.example.main.dto.ReplayDto;
-import org.example.main.dto.mapper.*;
-import org.example.main.entity.PickedHero;
+import lombok.RequiredArgsConstructor;
+import org.example.main.dto.match.MatchDto;
+import org.example.main.dto.match.MatchDtoMapper;
+import org.example.main.dto.replay.ReplayDto;
+import org.example.main.dto.replay.ReplayDtoMapper;
 import org.example.main.entity.Replay;
 import org.example.main.repository.ReplayRepository;
 import org.springframework.stereotype.Service;
@@ -12,31 +12,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
+@RequiredArgsConstructor
 public class ReplayService {
     private final ReplayRepository replayRepository;
-
-    public ReplayService(ReplayRepository replayRepository) {
-        this.replayRepository = replayRepository;
-    }
-
     public List<ReplayDto> FindAllReplays() {
-        return replayRepository.getReplayList().stream().map(ReplayDtoMapper::convertEntityToDto).toList();
+        return replayRepository.findAll().stream().map(ReplayDtoMapper::convertEntityToDto).toList();
     }
 
     public void deleteReplay(int idInList) {
-        replayRepository.getReplayList().remove(idInList);
+        replayRepository.deleteById(idInList);
     }
 
     public void replayEditUpdate(int idInList, ReplayDto replayDto) {
-        Replay replay = replayRepository.getReplayList().get(idInList);
-        replay.setId(replayDto.getUuid());
+        Replay replay = replayRepository.findById(idInList);
+
         replay.setSteamApiMatchReplayKey(replayDto.getSteamApiMatchReplayKey());
-        replay.setMatch(MatchDtoMapper.convertDtoToEntity(replayDto.getMatch()));
-        replayRepository.getReplayList().set(idInList, replay);
+
+        replayRepository.save(replay);
     }
 
     public void addReplay(ReplayDto replayDto) {
-        replayRepository.getReplayList().add(ReplayDtoMapper.convertDtoToEntity(replayDto));
+        replayRepository.save(ReplayDtoMapper.convertDtoToEntity(replayDto));
+    }
+
+    public void addMatch(long id, MatchDto matchDto)
+    {
+        Replay replay = replayRepository.findById(id);
+        replay.setMatch(MatchDtoMapper.convertDtoToEntity(matchDto));
+        replayRepository.save(replay);
     }
 }

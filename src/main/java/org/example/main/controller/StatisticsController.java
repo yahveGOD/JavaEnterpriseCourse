@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.RoleDto;
-import org.example.main.dto.StatisticsDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.StatisticsDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.statistics.StatisticsDto;
+import org.example.main.dto.statistics.StatisticsDtoMapper;
 import org.example.main.entity.Statistics;
-import org.example.main.service.RoleService;
 import org.example.main.service.StatisticsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/statistics")
 @RequiredArgsConstructor
 public class StatisticsController {
@@ -45,7 +40,6 @@ public class StatisticsController {
         return statisticsService.FindAllStats();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(statisticsService.FindAllStats().stream().map(StatisticsDtoMapper::convertDtoToEntity).toList());

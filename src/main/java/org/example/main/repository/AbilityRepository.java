@@ -9,19 +9,24 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class AbilityRepository {
-    private HeroRepository hr = new HeroRepository();
-    @Getter
-    private List<Ability> abilities;
-
+public class AbilityRepository extends AbstractRepository<Ability> {
     public AbilityRepository() {
-        abilities = new ArrayList<>();
-        Ability ability1 = new Ability(0,hr.getHeroes().get(0),"123","098","kel",1234,true);
-        Ability ability2 = new Ability(1,hr.getHeroes().get(1),"12341213","8998","Kel'Thuzad",122,true);
-        abilities.add(ability1);
-        abilities.add(ability2);
+        save(Ability.builder()
+                .name("123")
+                .hero(new Hero("123",0.5f,0.4f,100,10,10,10))
+                .damageType("zxc")
+                .description("qwe")
+                .fixedDamage(123)
+                .isPassive(true)
+                .build());
+        save(Ability.builder()
+                .name("777")
+                .hero(new Hero("zxc",0.5f,0.4f,11,11,11,11))
+                .damageType("qwe")
+                .description("xzc")
+                .fixedDamage(777)
+                .isPassive(true)
+                .build());
     }
-
-
 }
 

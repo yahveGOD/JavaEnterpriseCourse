@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.AbilityDto;
-import org.example.main.dto.GameModeDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.GameModeDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.gamemode.GameModeDto;
+import org.example.main.dto.gamemode.GameModeDtoMapper;
 import org.example.main.entity.GameMode;
-import org.example.main.service.AbilityService;
 import org.example.main.service.GameModeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/game_mode")
 @RequiredArgsConstructor
 public class GameModeController {
@@ -45,7 +40,6 @@ public class GameModeController {
         return gameModeService.FindAllGameModes();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(gameModeService.FindAllGameModes().stream().map(GameModeDtoMapper::convertDtoToEntity).toList());

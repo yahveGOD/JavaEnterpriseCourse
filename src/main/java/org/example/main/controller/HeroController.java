@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.GameModeDto;
-import org.example.main.dto.HeroDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.HeroDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.hero.HeroDto;
+import org.example.main.dto.hero.HeroDtoMapper;
 import org.example.main.entity.Hero;
-import org.example.main.service.GameModeService;
 import org.example.main.service.HeroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/hero")
 @RequiredArgsConstructor
 public class HeroController {
@@ -45,7 +40,6 @@ public class HeroController {
         return heroService.FindAllHeroes();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(heroService.FindAllHeroes().stream().map(HeroDtoMapper::convertDtoToEntity).toList());

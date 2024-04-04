@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.TalentTreeDto;
-import org.example.main.dto.UserDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.UserDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.user.UserDto;
+import org.example.main.dto.user.UserDtoMapper;
 import org.example.main.entity.User;
-import org.example.main.service.TalentTreeService;
 import org.example.main.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
@@ -45,7 +40,6 @@ public class UserController {
         return userService.FindAllUsers();
     }
 
-    @GetMapping("/serialize")
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(userService.FindAllUsers().stream().map(UserDtoMapper::convertDtoToEntity).toList());

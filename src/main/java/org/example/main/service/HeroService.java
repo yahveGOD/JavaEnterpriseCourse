@@ -1,10 +1,8 @@
 package org.example.main.service;
 
-import org.example.main.dto.GameModeDto;
-import org.example.main.dto.HeroDto;
-import org.example.main.dto.mapper.GameModeDtoMapper;
-import org.example.main.dto.mapper.HeroDtoMapper;
-import org.example.main.entity.GameMode;
+import lombok.RequiredArgsConstructor;
+import org.example.main.dto.hero.HeroDto;
+import org.example.main.dto.hero.HeroDtoMapper;
 import org.example.main.entity.Hero;
 import org.example.main.repository.HeroRepository;
 import org.springframework.stereotype.Service;
@@ -12,25 +10,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
+@RequiredArgsConstructor
 public class HeroService {
     private final HeroRepository heroRepository;
 
-    public HeroService(HeroRepository heroRepository) {
-        this.heroRepository = heroRepository;
-    }
-
     public List<HeroDto> FindAllHeroes() {
-        return heroRepository.getHeroes().stream().map(HeroDtoMapper::convertEntityToDto).toList();
+        return heroRepository.findAll().stream().map(HeroDtoMapper::convertEntityToDto).toList();
     }
 
     public void deleteHero(int idInList) {
-        heroRepository.getHeroes().remove(idInList);
+        heroRepository.deleteById(idInList);
     }
 
     public void heroEditUpdate(int idInList, HeroDto heroDto) {
-        Hero hero = heroRepository.getHeroes().get(idInList);
-        hero.setId(heroDto.getUuid());
+        Hero hero = heroRepository.findById(idInList);
+
         hero.setName(heroDto.getName());
         hero.setAgility(heroDto.getAgility());
         hero.setIntelligence(heroDto.getIntelligence());
@@ -38,11 +32,11 @@ public class HeroService {
         hero.setPickedTimes(heroDto.getPickedTimes());
         hero.setWinRate(heroDto.getWinRate());
         hero.setPickRate(heroDto.getPickRate());
-        heroRepository.getHeroes().set(idInList, hero);
+
+        heroRepository.save(hero);
     }
 
     public void addHero(HeroDto heroDto) {
-        heroRepository.getHeroes().add(HeroDtoMapper.convertDtoToEntity(heroDto));
+        heroRepository.save(HeroDtoMapper.convertDtoToEntity(heroDto));
     }
-
 }

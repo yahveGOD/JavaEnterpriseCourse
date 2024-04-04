@@ -9,16 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TalentTreeRepository {
-    private HeroRepository hr = new HeroRepository();
-    @Getter
-    private List<TalentTree> talentTreeList;
+public class TalentTreeRepository extends AbstractRepository<TalentTree>{
 
     public TalentTreeRepository() {
-        talentTreeList = new ArrayList<>();
-        TalentTree talentTree1 = new TalentTree(0, hr.getHeroes().get(0), 5, "zxc", "qwe");
-        TalentTree talentTree2 = new TalentTree(0, hr.getHeroes().get(0), 5, "zxc", "qwe");
-        talentTreeList.add(talentTree1);
-        talentTreeList.add(talentTree2);
+        save(TalentTree.builder()
+                .talentRight("123")
+                .talentLeft("zxc")
+                .levelRequired(5)
+                .build());
+        save(TalentTree.builder()
+                .talentRight("111")
+                .talentLeft("qwe")
+                .levelRequired(10)
+                .build());
     }
 }

@@ -8,15 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class RoleRepository {
-    @Getter
-    private List<Role> roleList;
+public class RoleRepository extends AbstractRepository<Role> {
     RoleRepository()
     {
-        roleList = new ArrayList<>();
-        Role role1 = new Role(0, "zxc");
-        Role role2 = new Role(1, "qwe");
-        roleList.add(role1);
-        roleList.add(role2);
+        save(Role.builder()
+                .title("123")
+                .build());
     }
 }

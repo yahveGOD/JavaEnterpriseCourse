@@ -3,22 +3,17 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.ReplayDto;
-import org.example.main.dto.RoleDto;
-import org.example.main.dto.mapper.AbilityDtoMapper;
-import org.example.main.dto.mapper.RoleDtoMapper;
-import org.example.main.entity.Ability;
+import org.example.main.dto.role.RoleDto;
+import org.example.main.dto.role.RoleDtoMapper;
 import org.example.main.entity.Role;
-import org.example.main.service.ReplayService;
 import org.example.main.service.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/role")
 @RequiredArgsConstructor
 public class RoleController {
@@ -44,7 +39,7 @@ public class RoleController {
     public List<RoleDto> findAll() {
         return roleService.FindAllRoles();
     }
-    @GetMapping("/serialize")
+
     public ResponseEntity<String> getJson() {
         try {
             String json = serializeToJson(roleService.FindAllRoles().stream().map(RoleDtoMapper::convertDtoToEntity).toList());
