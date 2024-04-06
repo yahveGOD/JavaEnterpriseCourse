@@ -1,7 +1,7 @@
-package org.example.main.dto.role;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.role.RoleDto;
+import org.example.main.dto.RoleDto;
 import org.example.main.entity.Role;
 
 @UtilityClass
@@ -10,7 +10,7 @@ public class RoleDtoMapper {
     {
         return RoleDto.builder()
                 .title(source.getTitle())
-                .uuid(source.getId())
+                .id(source.getId())
                 .build();
     }
 

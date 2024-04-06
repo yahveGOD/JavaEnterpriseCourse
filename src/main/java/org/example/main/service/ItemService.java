@@ -1,8 +1,8 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.item.ItemDto;
-import org.example.main.dto.item.ItemDtoMapper;
+import org.example.main.dto.ItemDto;
+import org.example.main.mapper.ItemDtoMapper;
 import org.example.main.entity.Item;
 import org.example.main.repository.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    public List<ItemDto> FindAllItems() {
+    public List<ItemDto> findAllItems() {
         return itemRepository.findAll().stream().map(ItemDtoMapper::convertEntityToDto).toList();
     }
 

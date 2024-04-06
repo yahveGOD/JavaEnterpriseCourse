@@ -1,8 +1,8 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.user.UserDto;
-import org.example.main.dto.user.UserDtoMapper;
+import org.example.main.dto.UserDto;
+import org.example.main.mapper.UserDtoMapper;
 import org.example.main.entity.User;
 import org.example.main.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public List<UserDto> FindAllUsers() {
+    public List<UserDto> findAllUsers() {
         return userRepository.findAll().stream().map(UserDtoMapper::convertEntityToDto).toList();
     }
 

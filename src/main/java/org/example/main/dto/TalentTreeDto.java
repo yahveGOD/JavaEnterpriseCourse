@@ -1,7 +1,7 @@
-package org.example.main.dto.talentTree;
+package org.example.main.dto;
 
 import lombok.*;
-import org.example.main.dto.hero.HeroDto;
+import org.example.main.dto.HeroDto;
 
 @Getter
 @Setter
@@ -9,7 +9,7 @@ import org.example.main.dto.hero.HeroDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TalentTreeDto {
-    private long uuid;
+    private long id;
     private HeroDto hero;
     private int levelRequired;
     private String talentLeft;

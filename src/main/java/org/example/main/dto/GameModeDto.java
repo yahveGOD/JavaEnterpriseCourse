@@ -1,4 +1,4 @@
-package org.example.main.dto.gamemode;
+package org.example.main.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameModeDto {
-    private long uuid;
+    private long id;
     private String name;
     private String description;
     private boolean isEvent;

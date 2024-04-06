@@ -1,7 +1,7 @@
-package org.example.main.dto.replay;
+package org.example.main.dto;
 
 import lombok.*;
-import org.example.main.dto.match.MatchDto;
+import org.example.main.dto.MatchDto;
 
 @Getter
 @Setter
@@ -9,7 +9,7 @@ import org.example.main.dto.match.MatchDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReplayDto {
-    private long uuid;
+    private long id;
     private int steamApiMatchReplayKey;
     private MatchDto match;
 }

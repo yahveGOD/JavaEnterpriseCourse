@@ -1,10 +1,10 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.match.MatchDto;
-import org.example.main.dto.match.MatchDtoMapper;
-import org.example.main.dto.replay.ReplayDto;
-import org.example.main.dto.replay.ReplayDtoMapper;
+import org.example.main.dto.MatchDto;
+import org.example.main.mapper.MatchDtoMapper;
+import org.example.main.dto.ReplayDto;
+import org.example.main.mapper.ReplayDtoMapper;
 import org.example.main.entity.Replay;
 import org.example.main.repository.ReplayRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReplayService {
     private final ReplayRepository replayRepository;
-    public List<ReplayDto> FindAllReplays() {
+    public List<ReplayDto> findAllReplays() {
         return replayRepository.findAll().stream().map(ReplayDtoMapper::convertEntityToDto).toList();
     }
 

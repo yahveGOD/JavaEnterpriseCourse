@@ -1,13 +1,13 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.hero.HeroDtoMapper;
-import org.example.main.dto.inventory.InventoryDtoMapper;
-import org.example.main.dto.match.MatchDtoMapper;
-import org.example.main.dto.pickedHero.PickedHeroDto;
-import org.example.main.dto.pickedHero.PickedHeroDtoMapper;
-import org.example.main.dto.statistics.StatisticsDtoMapper;
-import org.example.main.dto.user.UserDtoMapper;
+import org.example.main.mapper.HeroDtoMapper;
+import org.example.main.mapper.InventoryDtoMapper;
+import org.example.main.mapper.MatchDtoMapper;
+import org.example.main.dto.PickedHeroDto;
+import org.example.main.mapper.PickedHeroDtoMapper;
+import org.example.main.mapper.StatisticsDtoMapper;
+import org.example.main.mapper.UserDtoMapper;
 import org.example.main.entity.Hero;
 import org.example.main.entity.Match;
 import org.example.main.entity.PickedHero;
@@ -21,7 +21,7 @@ public class PickedHeroService {
     private final PickedHeroRepository pickedHeroRepository;
 
 
-    public List<PickedHeroDto> FindAllPickedHeroes() {
+    public List<PickedHeroDto> findAllPickedHeroes() {
         return pickedHeroRepository.findAll().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList();
     }
 

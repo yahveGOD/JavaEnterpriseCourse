@@ -1,8 +1,7 @@
-package org.example.main.dto.hero;
+package org.example.main.mapper;
 
-import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.hero.HeroDto;
+import org.example.main.dto.HeroDto;
 import org.example.main.entity.Hero;
 
 @UtilityClass

@@ -1,8 +1,8 @@
-package org.example.main.dto.replay;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.match.MatchDtoMapper;
-import org.example.main.dto.replay.ReplayDto;
+import org.example.main.dto.ReplayDto;
+import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.entity.Replay;
 
 @UtilityClass
@@ -11,7 +11,7 @@ public class ReplayDtoMapper {
     {
         return ReplayDto.builder()
                 .match(MatchDtoMapper.convertEntityToDto(source.getMatch()))
-                .uuid(source.getId())
+                .id(source.getId())
                 .steamApiMatchReplayKey(source.getSteamApiMatchReplayKey())
                 .build();
     }

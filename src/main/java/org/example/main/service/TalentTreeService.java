@@ -1,10 +1,10 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.hero.HeroDto;
-import org.example.main.dto.talentTree.TalentTreeDto;
-import org.example.main.dto.hero.HeroDtoMapper;
-import org.example.main.dto.talentTree.TalentTreeDtoMapper;
+import org.example.main.dto.HeroDto;
+import org.example.main.dto.TalentTreeDto;
+import org.example.main.mapper.HeroDtoMapper;
+import org.example.main.mapper.TalentTreeDtoMapper;
 import org.example.main.entity.TalentTree;
 import org.example.main.repository.TalentTreeRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 public class TalentTreeService {
     private final TalentTreeRepository talentTreeRepository;
 
-    public List<TalentTreeDto> FindAllTrees() {
+    public List<TalentTreeDto> findAllTrees() {
         return talentTreeRepository.findAll().stream().map(TalentTreeDtoMapper::convertEntityToDto).toList();
     }
 
@@ -28,7 +28,6 @@ public class TalentTreeService {
 
         talentTree.setTalentLeft((talentTreeDto.getTalentLeft()));
         talentTree.setTalentRight(talentTreeDto.getTalentRight());
-        talentTree.setId(talentTreeDto.getUuid());
         talentTree.setLevelRequired(talentTreeDto.getLevelRequired());
 
         talentTreeRepository.save(talentTree);

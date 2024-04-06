@@ -1,7 +1,7 @@
-package org.example.main.dto.inventory;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.inventory.InventoryDto;
+import org.example.main.dto.InventoryDto;
 import org.example.main.entity.Inventory;
 
 @UtilityClass
@@ -9,7 +9,7 @@ public class InventoryDtoMapper {
     public static InventoryDto convertEntityToDto(Inventory source)
     {
         return InventoryDto.builder()
-                .uuid(source.getId())
+                .id(source.getId())
                 .buildEffectivity(source.getBuildEffectivity())
                 .build();
     }

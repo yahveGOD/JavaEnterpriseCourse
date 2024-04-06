@@ -1,4 +1,4 @@
-package org.example.main.dto.role;
+package org.example.main.dto;
 
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleDto {
-    private long uuid;
+    private long id;
     private String title;
 }

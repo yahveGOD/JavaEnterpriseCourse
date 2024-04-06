@@ -1,7 +1,6 @@
-package org.example.main.dto.ability;
+package org.example.main.dto;
 
 import lombok.*;
-import org.example.main.dto.hero.HeroDto;
 
 @Setter
 @Getter
@@ -9,7 +8,7 @@ import org.example.main.dto.hero.HeroDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AbilityDto {
-    private long uuid;
+    private long id;
     private HeroDto hero;
     private String name;
     private String description;

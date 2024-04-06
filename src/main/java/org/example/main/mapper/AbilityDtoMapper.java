@@ -1,7 +1,7 @@
-package org.example.main.dto.ability;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.hero.HeroDtoMapper;
+import org.example.main.dto.AbilityDto;
 import org.example.main.entity.Ability;
 
 @UtilityClass
@@ -9,7 +9,7 @@ public class AbilityDtoMapper {
     public static AbilityDto convertEntityToDto(Ability source)
     {
         return AbilityDto.builder()
-                .uuid(source.getId())
+                .id(source.getId())
                 .damageType(source.getDamageType())
                 .description(source.getDescription())
                 .fixedDamage(source.getFixedDamage())

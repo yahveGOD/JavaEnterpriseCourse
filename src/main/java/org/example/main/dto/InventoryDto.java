@@ -1,4 +1,4 @@
-package org.example.main.dto.inventory;
+package org.example.main.dto;
 
 import lombok.*;
 
@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InventoryDto {
-    private long uuid;
+    private long id;
     private float buildEffectivity;
 }

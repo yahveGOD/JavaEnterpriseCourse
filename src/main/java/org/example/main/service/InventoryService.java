@@ -1,8 +1,8 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.inventory.InventoryDto;
-import org.example.main.dto.inventory.InventoryDtoMapper;
+import org.example.main.dto.InventoryDto;
+import org.example.main.mapper.InventoryDtoMapper;
 import org.example.main.entity.Inventory;
 import org.example.main.repository.InventoryRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
-    public List<InventoryDto> FindAllInventories() {
+    public List<InventoryDto> findAllInventories() {
         return inventoryRepository.findAll().stream().map(InventoryDtoMapper::convertEntityToDto).toList();
     }
 

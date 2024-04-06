@@ -1,8 +1,8 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.statistics.StatisticsDto;
-import org.example.main.dto.statistics.StatisticsDtoMapper;
+import org.example.main.dto.StatisticsDto;
+import org.example.main.mapper.StatisticsDtoMapper;
 import org.example.main.entity.Statistics;
 import org.example.main.repository.StatisticsRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class StatisticsService {
     private final StatisticsRepository statisticsRepository;
 
-    public List<StatisticsDto> FindAllStats() {
+    public List<StatisticsDto> findAllStats() {
         return statisticsRepository.findAll().stream().map(StatisticsDtoMapper::convertEntityToDto).toList();
     }
 

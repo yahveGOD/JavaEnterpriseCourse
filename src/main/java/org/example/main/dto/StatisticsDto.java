@@ -1,4 +1,4 @@
-package org.example.main.dto.statistics;
+package org.example.main.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatisticsDto {
-    private long uuid;
+    private long id;
     private int kills;
     private int deaths;
     private int assists;

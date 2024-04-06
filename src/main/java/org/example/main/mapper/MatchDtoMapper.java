@@ -1,8 +1,8 @@
-package org.example.main.dto.match;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.gamemode.GameModeDtoMapper;
-import org.example.main.dto.match.MatchDto;
+import org.example.main.dto.MatchDto;
+import org.example.main.mapper.GameModeDtoMapper;
 import org.example.main.entity.Match;
 
 @UtilityClass
@@ -10,7 +10,7 @@ public class MatchDtoMapper {
     public static MatchDto convertEntityToDto(Match source)
     {
         return MatchDto.builder()
-                .uuid(source.getId())
+                .id(source.getId())
                 .direKills(source.getDireKills())
                 .duration(source.getDuration())
                 .gameMode(GameModeDtoMapper.convertEntityToDto(source.getGameMode()))

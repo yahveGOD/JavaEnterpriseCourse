@@ -3,8 +3,12 @@ package org.example.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.match.MatchDto;
-import org.example.main.dto.match.MatchDtoMapper;
+import org.example.main.dto.ItemDto;
+import org.example.main.dto.MatchDto;
+import org.example.main.entity.Item;
+import org.example.main.mapper.ItemDtoMapper;
+import org.example.main.mapper.JsonMapper;
+import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.entity.Match;
 import org.example.main.service.MatchService;
 import org.springframework.http.HttpStatus;
@@ -18,38 +22,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatchController {
     private final MatchService matchService;
-    private final ObjectMapper objectMapper;
+    private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(@RequestBody MatchDto matchDto) {
+    public void create(String jsonString) {
+        MatchDto matchDto = jsonMapper.convertFromJsonString(jsonString, MatchDto.class);
         matchService.addMatch(matchDto);
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
         matchService.deleteMatch(id);
+
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, @RequestBody MatchDto matchDto) {
+    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+        MatchDto matchDto = jsonMapper.convertFromJsonString(jsonString, MatchDto.class);
         matchService.matchEditUpdate(id, matchDto);
     }
 
     @GetMapping("/all")
-    public List<MatchDto> findAll() {
-        return matchService.FindAllMatches();
+    public String findAll() {
+        String json = jsonMapper.convertToJsonString(matchService.findAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
+        return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(matchService.FindAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(matchService.findAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");
         }
     }
 
-    private String serializeToJson(List<Match> matches) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(matches);
+    private String serializeToJson(List<Match> matches){
+        return jsonMapper.convertToJsonString(matches);
     }
 }

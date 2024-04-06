@@ -1,14 +1,14 @@
-package org.example.main.dto.gamemode;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.gamemode.GameModeDto;
+import org.example.main.dto.GameModeDto;
 import org.example.main.entity.GameMode;
 
 @UtilityClass
 public class GameModeDtoMapper {
     public static GameModeDto convertEntityToDto(GameMode source){
         return GameModeDto.builder()
-                .uuid(source.getId())
+                .id(source.getId())
                 .description(source.getDescription())
                 .isEvent(source.isEvent())
                 .name(source.getName())

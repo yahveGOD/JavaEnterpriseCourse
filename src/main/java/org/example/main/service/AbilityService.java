@@ -1,10 +1,10 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.ability.AbilityDto;
-import org.example.main.dto.hero.HeroDto;
-import org.example.main.dto.ability.AbilityDtoMapper;
-import org.example.main.dto.hero.HeroDtoMapper;
+import org.example.main.dto.AbilityDto;
+import org.example.main.dto.HeroDto;
+import org.example.main.mapper.AbilityDtoMapper;
+import org.example.main.mapper.HeroDtoMapper;
 import org.example.main.entity.Ability;
 import org.example.main.repository.AbilityRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AbilityService {
     private final AbilityRepository abilityRepository;
-    public List<AbilityDto> FindAllAbilities() {
+    public List<AbilityDto> findAllAbilities() {
         return abilityRepository.findAll().stream().map(AbilityDtoMapper::convertEntityToDto).toList();
     }
     public void deleteAbility(long idInList) {

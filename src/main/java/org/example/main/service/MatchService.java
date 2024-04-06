@@ -1,10 +1,10 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.gamemode.GameModeDto;
-import org.example.main.dto.match.MatchDto;
-import org.example.main.dto.gamemode.GameModeDtoMapper;
-import org.example.main.dto.match.MatchDtoMapper;
+import org.example.main.dto.GameModeDto;
+import org.example.main.dto.MatchDto;
+import org.example.main.mapper.GameModeDtoMapper;
+import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.entity.Match;
 import org.example.main.repository.MatchRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MatchService {
     private final MatchRepository matchRepository;
 
-    public List<MatchDto> FindAllMatches() {
+    public List<MatchDto> findAllMatches() {
         return matchRepository.findAll().stream().map(MatchDtoMapper::convertEntityToDto).toList();
     }
 

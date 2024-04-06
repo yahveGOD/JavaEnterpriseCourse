@@ -1,8 +1,8 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.main.dto.hero.HeroDto;
-import org.example.main.dto.hero.HeroDtoMapper;
+import org.example.main.dto.HeroDto;
+import org.example.main.mapper.HeroDtoMapper;
 import org.example.main.entity.Hero;
 import org.example.main.repository.HeroRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class HeroService {
     private final HeroRepository heroRepository;
 
-    public List<HeroDto> FindAllHeroes() {
+    public List<HeroDto> findAllHeroes() {
         return heroRepository.findAll().stream().map(HeroDtoMapper::convertEntityToDto).toList();
     }
 

@@ -1,11 +1,7 @@
-package org.example.main.dto.pickedHero;
+package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.example.main.dto.hero.HeroDtoMapper;
-import org.example.main.dto.inventory.InventoryDtoMapper;
-import org.example.main.dto.statistics.StatisticsDtoMapper;
-import org.example.main.dto.user.UserDtoMapper;
-import org.example.main.dto.match.MatchDtoMapper;
+import org.example.main.dto.PickedHeroDto;
 import org.example.main.entity.PickedHero;
 
 @UtilityClass

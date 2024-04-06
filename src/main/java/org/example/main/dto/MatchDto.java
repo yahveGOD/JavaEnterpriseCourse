@@ -1,7 +1,7 @@
-package org.example.main.dto.match;
+package org.example.main.dto;
 
 import lombok.*;
-import org.example.main.dto.gamemode.GameModeDto;
+import org.example.main.dto.GameModeDto;
 
 import java.time.Duration;
 @Getter
@@ -10,7 +10,7 @@ import java.time.Duration;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDto {
-    private long uuid;
+    private long id;
     private Duration duration;
     private String victorySide;
     private GameModeDto gameMode;
