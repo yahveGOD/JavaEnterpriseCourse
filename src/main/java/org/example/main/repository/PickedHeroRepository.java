@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class PickedHeroRepository {
 
-    private static List<PickedHero> pickedHeroList;
+    private static List<PickedHero> pickedHeroList = new ArrayList<>();
     public PickedHeroRepository()
     {
         save(PickedHero.builder()
@@ -57,13 +57,16 @@ public class PickedHeroRepository {
 
     private int findObjectIndex(PickedHero object)
     {
-        for(int i = 0;i < pickedHeroList.size();i++)
-        {
-            if(object.getHero() == pickedHeroList.get(i).getHero() && object.getMatch() == pickedHeroList.get(i).getMatch()){
-                return i;
-            }
+        try {
+            for (int i = 0; i < pickedHeroList.size(); i++) {
+                if (object.getHero() == pickedHeroList.get(i).getHero() && object.getMatch() == pickedHeroList.get(i).getMatch()) {
+                    return i;
+                }
 
+            }
         }
+        catch (Exception e)
+        {}
         return -1;
     }
     public void deleteById(Match match,Hero hero)

@@ -1,0 +1,1 @@
+create index replay_match_id on replay(match_id);

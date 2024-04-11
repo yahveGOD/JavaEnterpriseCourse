@@ -1,0 +1,1 @@
+create index ability_hero_id on ability(hero_id);

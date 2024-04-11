@@ -1,0 +1,1 @@
+create index picked_hero_inventory_id on picked_hero(inventory_id);

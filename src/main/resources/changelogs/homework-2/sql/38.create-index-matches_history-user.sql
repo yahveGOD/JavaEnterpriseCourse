@@ -1,0 +1,1 @@
+create index matches_history_user_id on matches_history(user_id);

@@ -1,0 +1,2 @@
+INSERT INTO match (duration,victory_side,game_mode_id,radiant_kills,dire_kills) VALUES ('00:29:42','Dire',1,25,32);
+INSERT INTO match (duration,victory_side,game_mode_id,radiant_kills,dire_kills) VALUES ('00:17:21','Radiant',1,22,4);

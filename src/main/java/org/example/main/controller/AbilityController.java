@@ -43,6 +43,12 @@ public class AbilityController {
         String json = jsonMapper.convertToJsonString(abilityService.findAllAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
         return json;
     }
+    @GetMapping("/id")
+    public String findById(@PathVariable int id)
+    {
+        String json = jsonMapper.convertToJsonString(abilityService.findAbilityById(id));
+        return json;
+    }
 
     public ResponseEntity<String> getJson() {
         try {
