@@ -4,6 +4,8 @@ import lombok.experimental.UtilityClass;
 import org.example.main.dto.AbilityDto;
 import org.example.main.entity.Ability;
 
+import java.util.Optional;
+
 @UtilityClass
 public class AbilityDtoMapper {
     public static AbilityDto convertEntityToDto(Ability source)

@@ -31,25 +31,25 @@ public class MatchController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        matchService.deleteMatch(id);
+        matchService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         MatchDto matchDto = jsonMapper.convertFromJsonString(jsonString, MatchDto.class);
-        matchService.matchEditUpdate(id, matchDto);
+        matchService.update(id, matchDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(matchService.findAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(matchService.findAll().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(matchService.findAllMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(matchService.findAll().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

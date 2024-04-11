@@ -13,15 +13,15 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public List<UserDto> findAllUsers() {
+    public List<UserDto> findAll() {
         return userRepository.findAll().stream().map(UserDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteUser(int idInList) {
+    public void delete(int idInList) {
         userRepository.deleteById(idInList);
     }
 
-    public void userEditUpdate(int idInList, UserDto userDto) {
+    public void update(int idInList, UserDto userDto) {
         User user = userRepository.findById(idInList);
 
         user.setName(userDto.getName());

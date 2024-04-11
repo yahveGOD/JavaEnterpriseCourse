@@ -31,25 +31,25 @@ public class GameModeController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        gameModeService.deleteGameMode(id);
+        gameModeService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         GameModeDto gameModeDto = jsonMapper.convertFromJsonString(jsonString, GameModeDto.class);
-        gameModeService.gameModeEditUpdate(id, gameModeDto);
+        gameModeService.update(id, gameModeDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(gameModeService.findAllGameModes().stream().map(GameModeDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(gameModeService.findAll().stream().map(GameModeDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(gameModeService.findAllGameModes().stream().map(GameModeDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(gameModeService.findAll().stream().map(GameModeDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

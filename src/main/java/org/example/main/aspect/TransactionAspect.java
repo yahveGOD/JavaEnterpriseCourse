@@ -21,8 +21,7 @@ public class TransactionAspect {
 
     @Before("@annotation(Transaction)")
     public void transactionAnnotationPointcut() throws SQLException {
-        connectionHolder.transactional = true;
-        connectionHolder.getConnection().beginRequest();
+        connectionHolder.getTransactionConnection();
     }
 
     @Around("transactionAnnotationPointcut()")
@@ -32,12 +31,12 @@ public class TransactionAspect {
 
             Object result = joinPoint.proceed();
 
-            commitTransaction();
+            commitTransaction(connection);
 
             return result;
         } catch (RuntimeException e) {
 
-            rollbackTransaction();
+            rollbackTransaction(connection);
             throw e;
         }
         finally {
@@ -46,28 +45,25 @@ public class TransactionAspect {
         }
     }
 
-    private void rollbackTransaction() {
+    private void rollbackTransaction(Connection connection) {
         try {
-            Connection connection = connectionHolder.getConnection();
             connection.rollback();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void beginTransaction()
+    private void beginTransaction(Connection connection)
     {
         try {
-            Connection connection = connectionHolder.getConnection();
             connection.beginRequest();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    private void commitTransaction()
+    private void commitTransaction(Connection connection)
     {
         try {
-            Connection connection = connectionHolder.getConnection();
             connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);

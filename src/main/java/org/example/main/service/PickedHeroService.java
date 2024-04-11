@@ -21,15 +21,15 @@ public class PickedHeroService {
     private final PickedHeroRepository pickedHeroRepository;
 
 
-    public List<PickedHeroDto> findAllPickedHeroes() {
+    public List<PickedHeroDto> findAll() {
         return pickedHeroRepository.findAll().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deletePickedHero(int idInList) {
+    public void delete(int idInList) {
         pickedHeroRepository.findAll().remove(idInList);
     }
 
-    public void pickedHeroEditUpdate(Hero hero, Match match, PickedHeroDto pickedHeroDto) {
+    public void update(Hero hero, Match match, PickedHeroDto pickedHeroDto) {
         PickedHero pickedHero = pickedHeroRepository.findByMatchAndHero(match,hero);
 
         pickedHero.setHero(HeroDtoMapper.convertDtoToEntity(pickedHeroDto.getHero()));

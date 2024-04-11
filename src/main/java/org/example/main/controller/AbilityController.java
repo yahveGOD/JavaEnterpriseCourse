@@ -28,31 +28,31 @@ public class AbilityController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        abilityService.deleteAbility(id);
+        abilityService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
             AbilityDto abilityDto = jsonMapper.convertFromJsonString(jsonString, AbilityDto.class);
-            abilityService.abilityEditUpdate(id, abilityDto);
+            abilityService.update(id, abilityDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(abilityService.findAllAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(abilityService.findAll().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
         return json;
     }
     @GetMapping("/id")
     public String findById(@PathVariable int id)
     {
-        String json = jsonMapper.convertToJsonString(abilityService.findAbilityById(id));
+        String json = jsonMapper.convertToJsonString(abilityService.findById(id));
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(abilityService.findAllAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(abilityService.findAll().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

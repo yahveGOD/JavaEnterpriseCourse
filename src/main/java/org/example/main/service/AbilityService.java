@@ -11,26 +11,27 @@ import org.example.main.repository.AbilityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AbilityService {
     private final AbilityRepository abilityRepository;
     @Transaction
-    public List<AbilityDto> findAllAbilities() {
+    public List<AbilityDto> findAll() {
         return abilityRepository.findAll().stream().map(AbilityDtoMapper::convertEntityToDto).toList();
     }
     @Transaction
-    public AbilityDto findAbilityById(long id) {
-        return  AbilityDtoMapper.convertEntityToDto(abilityRepository.findById(id));
+    public AbilityDto findById(long id) {
+        return  AbilityDtoMapper.convertEntityToDto((abilityRepository.findById(id)).orElseThrow(RuntimeException::new));
     }
     @Transaction
-    public void deleteAbility(long idInList) {
-        abilityRepository.deleteById(idInList);
+    public void delete(long id) {
+        abilityRepository.deleteById(id);
     }
     @Transaction
-    public void abilityEditUpdate(long idInList,AbilityDto abilityDto) {
-        Ability ability = abilityRepository.findById(idInList);
+    public void update(long id,AbilityDto abilityDto) {
+        Ability ability = abilityRepository.findById((id)).orElseThrow(RuntimeException::new);
 
         if(abilityDto.getName()!= null)
             ability.setName(abilityDto.getName());
@@ -51,7 +52,7 @@ public class AbilityService {
     @Transaction
     public void addHero(long id,HeroDto heroDto)
     {
-        Ability ability = abilityRepository.findById(id);
+        Ability ability = abilityRepository.findById((id)).orElseThrow(RuntimeException::new);
         ability.setHero(HeroDtoMapper.convertDtoToEntity(heroDto));
         abilityRepository.save(ability);
     }

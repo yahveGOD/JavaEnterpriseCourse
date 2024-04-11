@@ -31,25 +31,25 @@ public class ItemController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        itemService.deleteItem(id);
+        itemService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         ItemDto itemDto = jsonMapper.convertFromJsonString(jsonString, ItemDto.class);
-        itemService.itemEditUpdate(id, itemDto);
+        itemService.update(id, itemDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(itemService.findAllItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(itemService.findAll().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(itemService.findAllItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(itemService.findAll().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

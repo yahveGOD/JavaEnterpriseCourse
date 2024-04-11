@@ -28,7 +28,6 @@ import java.util.Map;
 public class ConnectionHolder {
     private final DataSource dataSource;
     private final Map<Thread,Connection> connectionMap = new HashMap<>();
-    public boolean transactional;
     private final List<Connection> pool = new ArrayList<>();
 
     private Connection createConnection() throws SQLException {

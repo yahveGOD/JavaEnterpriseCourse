@@ -13,15 +13,15 @@ import java.util.List;
 public class StatisticsService {
     private final StatisticsRepository statisticsRepository;
 
-    public List<StatisticsDto> findAllStats() {
+    public List<StatisticsDto> findAll() {
         return statisticsRepository.findAll().stream().map(StatisticsDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteStatistics(int idInList) {
+    public void delete(int idInList) {
         statisticsRepository.deleteById(idInList);
     }
 
-    public void statisticsEditUpdate(int idInList, StatisticsDto statisticsDto) {
+    public void update(int idInList, StatisticsDto statisticsDto) {
         Statistics statistics = statisticsRepository.findById(idInList);
 
         statistics.setDeaths(statisticsDto.getDeaths());

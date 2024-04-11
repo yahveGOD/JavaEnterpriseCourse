@@ -15,15 +15,15 @@ import java.util.List;
 public class MatchService {
     private final MatchRepository matchRepository;
 
-    public List<MatchDto> findAllMatches() {
+    public List<MatchDto> findAll() {
         return matchRepository.findAll().stream().map(MatchDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteMatch(int idInList) {
+    public void delete(int idInList) {
         matchRepository.findById(idInList);
     }
 
-    public void matchEditUpdate(int idInList, MatchDto matchDto) {
+    public void update(int idInList, MatchDto matchDto) {
         Match match = matchRepository.findById(idInList);
 
         match.setDuration(matchDto.getDuration());

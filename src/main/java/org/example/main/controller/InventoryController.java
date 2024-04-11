@@ -31,25 +31,25 @@ public class InventoryController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        inventoryService.deleteInventory(id);
+        inventoryService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         InventoryDto inventoryDto = jsonMapper.convertFromJsonString(jsonString, InventoryDto.class);
-        inventoryService.inventoryEditUpdate(id, inventoryDto);
+        inventoryService.update(id, inventoryDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(inventoryService.findAllInventories().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(inventoryService.findAll().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(inventoryService.findAllInventories().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(inventoryService.findAll().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");
