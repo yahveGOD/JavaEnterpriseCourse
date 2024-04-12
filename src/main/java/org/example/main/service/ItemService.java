@@ -13,15 +13,15 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    public List<ItemDto> findAllItems() {
+    public List<ItemDto> findAll() {
         return itemRepository.findAll().stream().map(ItemDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteItem(int idInList) {
+    public void delete(int idInList) {
         itemRepository.deleteById(idInList);
     }
 
-    public void itemEditUpdate(int idInList, ItemDto itemDto) {
+    public void update(int idInList, ItemDto itemDto) {
         Item item = itemRepository.findById(idInList);
 
         item.setDescription(itemDto.getDescription());

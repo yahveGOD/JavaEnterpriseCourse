@@ -32,25 +32,25 @@ public class TalentTreeController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        talentTreeService.deleteTalentTree(id);
+        talentTreeService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         TalentTreeDto talentTreeDto = jsonMapper.convertFromJsonString(jsonString, TalentTreeDto.class);
-        talentTreeService.talentTreeEditUpdate(id, talentTreeDto);
+        talentTreeService.update(id, talentTreeDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(talentTreeService.findAllTrees().stream().map(TalentTreeDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(talentTreeService.findAll().stream().map(TalentTreeDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(talentTreeService.findAllTrees().stream().map(TalentTreeDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(talentTreeService.findAll().stream().map(TalentTreeDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

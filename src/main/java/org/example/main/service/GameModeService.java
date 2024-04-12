@@ -14,15 +14,15 @@ import java.util.List;
 public class GameModeService {
     private final GameModeRepository gameModeRepository;
 
-    public List<GameModeDto> findAllGameModes(){
+    public List<GameModeDto> findAll(){
         return gameModeRepository.findAll().stream().map(GameModeDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteGameMode(int idInList) {
+    public void delete(int idInList) {
         gameModeRepository.deleteById(idInList);
     }
 
-    public void gameModeEditUpdate(int idInList, GameModeDto gameModeDto) {
+    public void update(int idInList, GameModeDto gameModeDto) {
         GameMode gameMode = gameModeRepository.findById(idInList);
 
         gameMode.setDescription(gameModeDto.getDescription());

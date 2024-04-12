@@ -14,15 +14,15 @@ import java.util.List;
 public class HeroService {
     private final HeroRepository heroRepository;
 
-    public List<HeroDto> findAllHeroes() {
+    public List<HeroDto> findAll() {
         return heroRepository.findAll().stream().map(HeroDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteHero(int idInList) {
+    public void delete(int idInList) {
         heroRepository.deleteById(idInList);
     }
 
-    public void heroEditUpdate(int idInList, HeroDto heroDto) {
+    public void update(int idInList, HeroDto heroDto) {
         Hero hero = heroRepository.findById(idInList);
 
         hero.setName(heroDto.getName());

@@ -30,25 +30,25 @@ public class ReplayController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        replayService.deleteReplay(id);
+        replayService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         ReplayDto replayDto = jsonMapper.convertFromJsonString(jsonString, ReplayDto.class);
-        replayService.replayEditUpdate(id, replayDto);
+        replayService.update(id, replayDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(replayService.findAllReplays().stream().map(ReplayDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(replayService.findAll().stream().map(ReplayDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(replayService.findAllReplays().stream().map(ReplayDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(replayService.findAll().stream().map(ReplayDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

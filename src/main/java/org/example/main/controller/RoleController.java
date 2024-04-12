@@ -30,25 +30,25 @@ public class RoleController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        roleService.deleteRole(id);
+        roleService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
     public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
         RoleDto roleDto = jsonMapper.convertFromJsonString(jsonString, RoleDto.class);
-        roleService.roleEditUpdate(id, roleDto);
+        roleService.update(id, roleDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(roleService.findAllRoles().stream().map(RoleDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(roleService.findAll().stream().map(RoleDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(roleService.findAllRoles().stream().map(RoleDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(roleService.findAll().stream().map(RoleDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

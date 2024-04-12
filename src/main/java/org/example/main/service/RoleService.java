@@ -14,15 +14,15 @@ import java.util.List;
 public class RoleService {
     private final RoleRepository roleRepository;
 
-    public List<RoleDto> findAllRoles() {
+    public List<RoleDto> findAll() {
         return roleRepository.findAll().stream().map(RoleDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteRole(int idInList) {
+    public void delete(int idInList) {
         roleRepository.deleteById(idInList);
     }
 
-    public void roleEditUpdate(int idInList, RoleDto roleDto) {
+    public void update(int idInList, RoleDto roleDto) {
         Role role = roleRepository.findById(idInList);
 
         role.setTitle(roleDto.getTitle());

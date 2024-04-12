@@ -1,0 +1,1 @@
+create index matches_history_match_id on matches_history(match_id);

@@ -15,15 +15,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReplayService {
     private final ReplayRepository replayRepository;
-    public List<ReplayDto> findAllReplays() {
+    public List<ReplayDto> findAll() {
         return replayRepository.findAll().stream().map(ReplayDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteReplay(int idInList) {
+    public void delete(int idInList) {
         replayRepository.deleteById(idInList);
     }
 
-    public void replayEditUpdate(int idInList, ReplayDto replayDto) {
+    public void update(int idInList, ReplayDto replayDto) {
         Replay replay = replayRepository.findById(idInList);
 
         replay.setSteamApiMatchReplayKey(replayDto.getSteamApiMatchReplayKey());

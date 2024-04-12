@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.annotation.Transaction;
 import org.example.main.dto.AbilityDto;
 import org.example.main.dto.HeroDto;
 import org.example.main.mapper.AbilityDtoMapper;
@@ -10,20 +11,27 @@ import org.example.main.repository.AbilityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AbilityService {
     private final AbilityRepository abilityRepository;
-    public List<AbilityDto> findAllAbilities() {
+    @Transaction
+    public List<AbilityDto> findAll() {
         return abilityRepository.findAll().stream().map(AbilityDtoMapper::convertEntityToDto).toList();
     }
-    public void deleteAbility(long idInList) {
-        abilityRepository.deleteById(idInList);
+    @Transaction
+    public AbilityDto findById(long id) {
+        return  AbilityDtoMapper.convertEntityToDto((abilityRepository.findById(id)).orElseThrow(RuntimeException::new));
     }
-
-    public void abilityEditUpdate(long idInList,AbilityDto abilityDto) {
-        Ability ability = abilityRepository.findById(idInList);
+    @Transaction
+    public void delete(long id) {
+        abilityRepository.deleteById(id);
+    }
+    @Transaction
+    public void update(long id,AbilityDto abilityDto) {
+        Ability ability = abilityRepository.findById((id)).orElseThrow(RuntimeException::new);
 
         if(abilityDto.getName()!= null)
             ability.setName(abilityDto.getName());
@@ -37,14 +45,14 @@ public class AbilityService {
 
         abilityRepository.save(ability);
     }
-
+    @Transaction
     public void addAbility(AbilityDto abilityDto) {
         abilityRepository.save(AbilityDtoMapper.convertDtoToEntity(abilityDto));
     }
-
+    @Transaction
     public void addHero(long id,HeroDto heroDto)
     {
-        Ability ability = abilityRepository.findById(id);
+        Ability ability = abilityRepository.findById((id)).orElseThrow(RuntimeException::new);
         ability.setHero(HeroDtoMapper.convertDtoToEntity(heroDto));
         abilityRepository.save(ability);
     }

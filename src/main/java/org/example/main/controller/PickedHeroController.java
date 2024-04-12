@@ -31,7 +31,7 @@ public class PickedHeroController {
     }
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable int id) {
-        pickedHeroService.deletePickedHero(id);
+        pickedHeroService.delete(id);
 
     }
 
@@ -40,18 +40,18 @@ public class PickedHeroController {
 
         PickedHeroDto pickedHeroDto = jsonMapper.convertFromJsonString(jsonString, PickedHeroDto.class);
 
-        pickedHeroService.pickedHeroEditUpdate(hero,match, pickedHeroDto);
+        pickedHeroService.update(hero,match, pickedHeroDto);
     }
 
     @GetMapping("/all")
     public String findAll() {
-        String json = jsonMapper.convertToJsonString(pickedHeroService.findAllPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
+        String json = jsonMapper.convertToJsonString(pickedHeroService.findAll().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
         return json;
     }
 
     public ResponseEntity<String> getJson() {
         try {
-            String json = serializeToJson(pickedHeroService.findAllPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
+            String json = serializeToJson(pickedHeroService.findAll().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while serializing object to JSON");

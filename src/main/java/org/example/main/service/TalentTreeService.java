@@ -15,15 +15,15 @@ import java.util.List;
 public class TalentTreeService {
     private final TalentTreeRepository talentTreeRepository;
 
-    public List<TalentTreeDto> findAllTrees() {
+    public List<TalentTreeDto> findAll() {
         return talentTreeRepository.findAll().stream().map(TalentTreeDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteTalentTree(int idInList) {
+    public void delete(int idInList) {
         talentTreeRepository.deleteById(idInList);
     }
 
-    public void talentTreeEditUpdate(int idInList,TalentTreeDto talentTreeDto) {
+    public void update(int idInList,TalentTreeDto talentTreeDto) {
         TalentTree talentTree = talentTreeRepository.findById(idInList);
 
         talentTree.setTalentLeft((talentTreeDto.getTalentLeft()));

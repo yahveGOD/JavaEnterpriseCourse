@@ -14,15 +14,15 @@ import java.util.List;
 public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
-    public List<InventoryDto> findAllInventories() {
+    public List<InventoryDto> findAll() {
         return inventoryRepository.findAll().stream().map(InventoryDtoMapper::convertEntityToDto).toList();
     }
 
-    public void deleteInventory(int idInList) {
+    public void delete(int idInList) {
         inventoryRepository.deleteById(idInList);
     }
 
-    public void inventoryEditUpdate(int idInList, InventoryDto inventoryDto) {
+    public void update(int idInList, InventoryDto inventoryDto) {
         Inventory inventory = inventoryRepository.findById(idInList);
 
         inventory.setBuildEffectivity(inventoryDto.getBuildEffectivity());
