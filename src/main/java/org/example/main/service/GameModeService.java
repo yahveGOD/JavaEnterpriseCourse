@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.main.dto.GameModeDto;
 import org.example.main.mapper.GameModeDtoMapper;
 import org.example.main.entity.GameMode;
+import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.repository.GameModeRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +19,23 @@ public class GameModeService {
         return gameModeRepository.findAll().stream().map(GameModeDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        gameModeRepository.deleteById(idInList);
+    public void delete(Long id) {
+        gameModeRepository.deleteById(id);
     }
 
-    public void update(int idInList, GameModeDto gameModeDto) {
-        GameMode gameMode = gameModeRepository.findById(idInList);
+    public void update(Long id, GameModeDto gameModeDto) {
+        GameMode gameMode = gameModeRepository.findById(id);
 
         gameMode.setDescription(gameModeDto.getDescription());
         gameMode.setName(gameModeDto.getName());
-        gameMode.setEvent(gameModeDto.isEvent());
-        gameMode.setNumberOfPLayers(gameModeDto.getNumberOfPLayers());
+       // gameMode.setIsEvent(gameModeDto.getIsEvent());
+        //gameMode.setNumberOfPLayers(gameModeDto.getNumberOfPLayers());
+        gameMode.setMatches(gameModeDto.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
 
-        gameModeRepository.save(gameMode);
+        gameModeRepository.update(gameMode);
     }
 
     public void addGameMode(GameModeDto gameModeDto) {
-        gameModeRepository.save(GameModeDtoMapper.convertDtoToEntity(gameModeDto));
+        gameModeRepository.create(GameModeDtoMapper.convertDtoToEntity(gameModeDto));
     }
 }

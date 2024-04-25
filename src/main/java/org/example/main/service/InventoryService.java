@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.main.dto.InventoryDto;
 import org.example.main.mapper.InventoryDtoMapper;
 import org.example.main.entity.Inventory;
+import org.example.main.mapper.ItemDtoMapper;
+import org.example.main.mapper.PickedHeroDtoMapper;
 import org.example.main.repository.InventoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +20,21 @@ public class InventoryService {
         return inventoryRepository.findAll().stream().map(InventoryDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        inventoryRepository.deleteById(idInList);
+    public void delete(Long id) {
+        inventoryRepository.deleteById(id);
     }
 
-    public void update(int idInList, InventoryDto inventoryDto) {
-        Inventory inventory = inventoryRepository.findById(idInList);
+    public void update(Long id, InventoryDto inventoryDto) {
+        Inventory inventory = inventoryRepository.findById(id);
 
         inventory.setBuildEffectivity(inventoryDto.getBuildEffectivity());
+        inventory.setItems(inventoryDto.getItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
+        inventory.setPickedHeroes(inventoryDto.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
 
-        inventoryRepository.save(inventory);
+        inventoryRepository.update(inventory);
     }
 
     public void addInventory(InventoryDto inventoryDto) {
-        inventoryRepository.save(InventoryDtoMapper.convertDtoToEntity(inventoryDto));
+        inventoryRepository.create(InventoryDtoMapper.convertDtoToEntity(inventoryDto));
     }
 }

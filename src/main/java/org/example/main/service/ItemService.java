@@ -2,6 +2,7 @@ package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.main.dto.ItemDto;
+import org.example.main.mapper.InventoryDtoMapper;
 import org.example.main.mapper.ItemDtoMapper;
 import org.example.main.entity.Item;
 import org.example.main.repository.ItemRepository;
@@ -17,12 +18,12 @@ public class ItemService {
         return itemRepository.findAll().stream().map(ItemDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        itemRepository.deleteById(idInList);
+    public void delete(Long id) {
+        itemRepository.deleteById(id);
     }
 
-    public void update(int idInList, ItemDto itemDto) {
-        Item item = itemRepository.findById(idInList);
+    public void update(Long id, ItemDto itemDto) {
+        Item item = itemRepository.findById(id);
 
         item.setDescription(itemDto.getDescription());
         item.setName(itemDto.getName());
@@ -30,11 +31,12 @@ public class ItemService {
         item.setWinRate(itemDto.getWinRate());
         item.setAbilityDescription(itemDto.getAbilityDescription());
         item.setBoughtTimes(itemDto.getBoughtTimes());
+        item.setInventoryList(itemDto.getInventoryList().stream().map(InventoryDtoMapper::convertDtoToEntity).toList());
 
-        itemRepository.save(item);
+        itemRepository.update(item);
     }
 
     public void addItem(ItemDto itemDto) {
-        itemRepository.save(ItemDtoMapper.convertDtoToEntity(itemDto));
+        itemRepository.create(ItemDtoMapper.convertDtoToEntity(itemDto));
     }
 }

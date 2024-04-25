@@ -8,11 +8,12 @@ import org.example.main.entity.GameMode;
 public class GameModeDtoMapper {
     public static GameModeDto convertEntityToDto(GameMode source){
         return GameModeDto.builder()
-                .id(source.getId())
+               // .id(source.getId())
                 .description(source.getDescription())
-                .isEvent(source.isEvent())
+                //.isEvent(source.getIsEvent())
                 .name(source.getName())
-                .numberOfPLayers(source.getNumberOfPLayers())
+                //.numberOfPLayers(source.getNumberOfPLayers())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -20,9 +21,10 @@ public class GameModeDtoMapper {
     {
         return GameMode.builder()
                 .description(source.getDescription())
-                .isEvent(source.isEvent())
+                //.isEvent(source.getIsEvent())
                 .name(source.getName())
-                .numberOfPLayers(source.getNumberOfPLayers())
+               // .numberOfPLayers(source.getNumberOfPLayers())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }

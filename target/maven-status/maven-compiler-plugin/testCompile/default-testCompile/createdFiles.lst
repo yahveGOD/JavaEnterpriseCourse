@@ -1,0 +1,7 @@
+org\example\main\repository\ItemRepositoryTests.class
+org\example\main\repository\RoleRepositoryTests.class
+org\example\main\repository\ReplayRepositoryTests.class
+org\example\main\repository\AbstractRepositoryTests.class
+org\example\main\repository\UserRepositoryTests.class
+org\example\main\repository\AbilityRepositoryTests.class
+org\example\main\repository\HeroRepositoryTests.class

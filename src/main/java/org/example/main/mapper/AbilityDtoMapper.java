@@ -17,7 +17,7 @@ public class AbilityDtoMapper {
                 .fixedDamage(source.getFixedDamage())
                 .hero(HeroDtoMapper.convertEntityToDto(source.getHero()))
                 .name(source.getName())
-                .isPassive(source.isPassive())
+                .isPassive(source.getIsPassive())
                 .build();
     }
 
@@ -29,7 +29,7 @@ public class AbilityDtoMapper {
                 .fixedDamage(source.getFixedDamage())
                 .hero(HeroDtoMapper.convertDtoToEntity(source.getHero()))
                 .name(source.getName())
-                .isPassive(source.isPassive())
+                .isPassive(source.getIsPassive())
                 .build();
     }
 }

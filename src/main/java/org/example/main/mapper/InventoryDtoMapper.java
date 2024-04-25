@@ -11,6 +11,8 @@ public class InventoryDtoMapper {
         return InventoryDto.builder()
                 .id(source.getId())
                 .buildEffectivity(source.getBuildEffectivity())
+                .items(source.getItems().stream().map(ItemDtoMapper::convertEntityToDto).toList())
+                .pickedHeroes(source.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -18,6 +20,8 @@ public class InventoryDtoMapper {
     {
         return Inventory.builder()
                 .buildEffectivity(source.getBuildEffectivity())
+                .items(source.getItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList())
+                .pickedHeroes(source.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }

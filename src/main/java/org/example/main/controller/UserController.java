@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         userService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         UserDto userDto = jsonMapper.convertFromJsonString(jsonString,UserDto.class);
         userService.update(id, userDto);
     }

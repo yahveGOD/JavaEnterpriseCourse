@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.entity.PickedHeroId;
 import org.example.main.mapper.HeroDtoMapper;
 import org.example.main.mapper.InventoryDtoMapper;
 import org.example.main.mapper.MatchDtoMapper;
@@ -8,8 +9,6 @@ import org.example.main.dto.PickedHeroDto;
 import org.example.main.mapper.PickedHeroDtoMapper;
 import org.example.main.mapper.StatisticsDtoMapper;
 import org.example.main.mapper.UserDtoMapper;
-import org.example.main.entity.Hero;
-import org.example.main.entity.Match;
 import org.example.main.entity.PickedHero;
 import org.example.main.repository.PickedHeroRepository;
 import org.springframework.stereotype.Service;
@@ -25,23 +24,23 @@ public class PickedHeroService {
         return pickedHeroRepository.findAll().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        pickedHeroRepository.findAll().remove(idInList);
+    public void delete(Long id) {
+        pickedHeroRepository.findAll().remove(id);
     }
 
-    public void update(Hero hero, Match match, PickedHeroDto pickedHeroDto) {
-        PickedHero pickedHero = pickedHeroRepository.findByMatchAndHero(match,hero);
+    public void update(PickedHeroId pickedHeroId, PickedHeroDto pickedHeroDto) {
+        PickedHero pickedHero = pickedHeroRepository.findByPickedHeroId(pickedHeroId);
 
-        pickedHero.setHero(HeroDtoMapper.convertDtoToEntity(pickedHeroDto.getHero()));
-        pickedHero.setMatch(MatchDtoMapper.convertDtoToEntity(pickedHeroDto.getMatch()));
+        pickedHero.setHeroes(pickedHeroDto.getHeroes().stream().map(HeroDtoMapper::convertDtoToEntity).toList());
+        pickedHero.setMatches(pickedHeroDto.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
         pickedHero.setUser(UserDtoMapper.convertDtoToEntity(pickedHeroDto.getUser()));
         pickedHero.setInventory(InventoryDtoMapper.convertDtoToEntity(pickedHeroDto.getInventory()));
         pickedHero.setStatistics(StatisticsDtoMapper.convertDtoToEntity(pickedHeroDto.getStatistics()));
 
-        pickedHeroRepository.save(pickedHero);
+        pickedHeroRepository.update(pickedHero);
     }
 
     public void addPickedHero(PickedHeroDto pickedHeroDto) {
-        pickedHeroRepository.save(PickedHeroDtoMapper.convertDtoToEntity(pickedHeroDto));
+        pickedHeroRepository.create(PickedHeroDtoMapper.convertDtoToEntity(pickedHeroDto));
     }
 }

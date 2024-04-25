@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.main.dto.MatchDto;
 import org.example.main.dto.PickedHeroDto;
+import org.example.main.entity.PickedHeroId;
 import org.example.main.mapper.JsonMapper;
 import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.mapper.PickedHeroDtoMapper;
@@ -30,17 +31,17 @@ public class PickedHeroController {
         pickedHeroService.addPickedHero(pickedHeroDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         pickedHeroService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "match")Match match,@PathVariable(value = "hero") Hero hero, String jsonString) {
+    public void editUpdate(@PathVariable(value = "pickedHeroId")PickedHeroId pickedHeroId, String jsonString) {
 
         PickedHeroDto pickedHeroDto = jsonMapper.convertFromJsonString(jsonString, PickedHeroDto.class);
 
-        pickedHeroService.update(hero,match, pickedHeroDto);
+        pickedHeroService.update(pickedHeroId, pickedHeroDto);
     }
 
     @GetMapping("/all")

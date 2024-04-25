@@ -30,13 +30,13 @@ public class GameModeController {
         gameModeService.addGameMode(gameModeDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         gameModeService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         GameModeDto gameModeDto = jsonMapper.convertFromJsonString(jsonString, GameModeDto.class);
         gameModeService.update(id, gameModeDto);
     }

@@ -1,16 +1,16 @@
 package org.example.main.repository;
-import lombok.Getter;
+
 import org.example.main.entity.Inventory;
+import org.example.main.repository.AbstractHibernateRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 @Repository
-public class InventoryRepository extends AbstractRepository<Inventory>{
+@Transactional
+public class InventoryRepository extends AbstractHibernateRepository<Inventory> {
 
-    public InventoryRepository() {
-        save(Inventory.builder()
-                .buildEffectivity(0.5f)
-                .build());
+    public InventoryRepository()
+    {
+        super(Inventory.class);
     }
 }

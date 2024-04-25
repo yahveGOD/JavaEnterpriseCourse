@@ -6,6 +6,8 @@ import org.example.main.dto.MatchDto;
 import org.example.main.mapper.GameModeDtoMapper;
 import org.example.main.mapper.MatchDtoMapper;
 import org.example.main.entity.Match;
+import org.example.main.mapper.ReplayDtoMapper;
+import org.example.main.mapper.UserDtoMapper;
 import org.example.main.repository.MatchRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +21,33 @@ public class MatchService {
         return matchRepository.findAll().stream().map(MatchDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        matchRepository.findById(idInList);
+    public void delete(Long id) {
+        matchRepository.findById(id);
     }
 
-    public void update(int idInList, MatchDto matchDto) {
-        Match match = matchRepository.findById(idInList);
+    public void update(Long id, MatchDto matchDto) {
+        Match match = matchRepository.findById(id);
 
         match.setDuration(matchDto.getDuration());
         match.setDireKills(matchDto.getDireKills());
         match.setVictorySide(matchDto.getVictorySide());
         match.setRadiantKills(matchDto.getRadiantKills());
+        match.setReplay(ReplayDtoMapper.convertDtoToEntity(matchDto.getReplay()));
+        match.setUsers(matchDto.getUsers().stream().map(UserDtoMapper::convertDtoToEntity).toList());
+        match.setGameMode(GameModeDtoMapper.convertDtoToEntity(matchDto.getGameMode()));
 
-        matchRepository.save(match);
+        matchRepository.update(match);
     }
 
     public void addMatch(MatchDto matchDto) {
-        matchRepository.save(MatchDtoMapper.convertDtoToEntity(matchDto));
+        matchRepository.create(MatchDtoMapper.convertDtoToEntity(matchDto));
     }
 
     public void addGameMode(long id, GameModeDto gameModeDto)
     {
         Match match = matchRepository.findById(id);
         match.setGameMode(GameModeDtoMapper.convertDtoToEntity(gameModeDto));
-        matchRepository.save(match);
+        matchRepository.create(match);
     }
 
 }

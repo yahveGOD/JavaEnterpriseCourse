@@ -1,6 +1,9 @@
 package org.example.main.dto;
 
 import lombok.*;
+import org.example.main.entity.PickedHero;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,4 +16,6 @@ public class StatisticsDto {
     private int deaths;
     private int assists;
     private int networth;
+    private List<PickedHeroDto> pickedHeroList;
+
 }

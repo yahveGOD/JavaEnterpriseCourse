@@ -8,11 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AbilityDto {
-    private long id;
+    private Long id;
     private HeroDto hero;
     private String name;
     private String description;
     private String damageType;
-    private int fixedDamage;
-    private boolean isPassive;
+    private Integer fixedDamage;
+    private Boolean isPassive;
 }

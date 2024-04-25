@@ -11,6 +11,7 @@ public class RoleDtoMapper {
         return RoleDto.builder()
                 .title(source.getTitle())
                 .id(source.getId())
+                .users(source.getUsers().stream().map(UserDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -18,6 +19,7 @@ public class RoleDtoMapper {
     {
         return Role.builder()
                 .title(source.getTitle())
+                .users(source.getUsers().stream().map(UserDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }

@@ -30,13 +30,13 @@ public class InventoryController {
         inventoryService.addInventory(inventoryDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         inventoryService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         InventoryDto inventoryDto = jsonMapper.convertFromJsonString(jsonString, InventoryDto.class);
         inventoryService.update(id, inventoryDto);
     }

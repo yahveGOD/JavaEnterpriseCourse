@@ -10,23 +10,27 @@ public class MatchDtoMapper {
     public static MatchDto convertEntityToDto(Match source)
     {
         return MatchDto.builder()
-                .id(source.getId())
-                .direKills(source.getDireKills())
+               .id(source.getId())
+               .direKills(source.getDireKills())
                 .duration(source.getDuration())
                 .gameMode(GameModeDtoMapper.convertEntityToDto(source.getGameMode()))
                 .radiantKills(source.getRadiantKills())
                 .victorySide(source.getVictorySide())
+                .users(source.getUsers().stream().map(UserDtoMapper::convertEntityToDto).toList())
+                .replay(ReplayDtoMapper.convertEntityToDto(source.getReplay()))
                 .build();
     }
 
     public static Match convertDtoToEntity(MatchDto source)
     {
         return Match.builder()
-                .direKills(source.getDireKills())
+              //  .direKills(source.getDireKills())
                 .duration(source.getDuration())
                 .gameMode(GameModeDtoMapper.convertDtoToEntity(source.getGameMode()))
-                .radiantKills(source.getRadiantKills())
+               // .radiantKills(source.getRadiantKills())
                 .victorySide(source.getVictorySide())
+                .users(source.getUsers().stream().map(UserDtoMapper::convertDtoToEntity).toList())
+                .replay(ReplayDtoMapper.convertDtoToEntity(source.getReplay()))
                 .build();
     }
 }

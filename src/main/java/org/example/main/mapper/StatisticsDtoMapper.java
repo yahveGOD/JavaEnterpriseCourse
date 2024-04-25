@@ -14,6 +14,7 @@ public class StatisticsDtoMapper {
                 .deaths(source.getDeaths())
                 .kills(source.getKills())
                 .networth(source.getNetworth())
+                .pickedHeroList(source.getPickedHeroList().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -24,6 +25,7 @@ public class StatisticsDtoMapper {
                 .deaths(source.getDeaths())
                 .kills(source.getKills())
                 .networth(source.getNetworth())
+                .pickedHeroList(source.getPickedHeroList().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }

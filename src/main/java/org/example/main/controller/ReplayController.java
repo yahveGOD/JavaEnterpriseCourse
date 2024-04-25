@@ -29,13 +29,13 @@ public class ReplayController {
         replayService.addReplay(replayDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         replayService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         ReplayDto replayDto = jsonMapper.convertFromJsonString(jsonString, ReplayDto.class);
         replayService.update(id, replayDto);
     }

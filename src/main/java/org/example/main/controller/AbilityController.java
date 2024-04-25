@@ -27,13 +27,13 @@ public class AbilityController {
             abilityService.addAbility(abilityDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         abilityService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
             AbilityDto abilityDto = jsonMapper.convertFromJsonString(jsonString, AbilityDto.class);
             abilityService.update(id, abilityDto);
     }
@@ -44,7 +44,7 @@ public class AbilityController {
         return json;
     }
     @GetMapping("/id")
-    public String findById(@PathVariable int id)
+    public String findById(@PathVariable Long id)
     {
         String json = jsonMapper.convertToJsonString(abilityService.findById(id));
         return json;

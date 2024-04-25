@@ -19,26 +19,27 @@ public class ReplayService {
         return replayRepository.findAll().stream().map(ReplayDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        replayRepository.deleteById(idInList);
+    public void delete(Long id) {
+        replayRepository.deleteById(id);
     }
 
-    public void update(int idInList, ReplayDto replayDto) {
-        Replay replay = replayRepository.findById(idInList);
+    public void update(Long id, ReplayDto replayDto) {
+        Replay replay = replayRepository.findById(id);
 
-        replay.setSteamApiMatchReplayKey(replayDto.getSteamApiMatchReplayKey());
+        //replay.setSteamApiMatchReplayKey(replayDto.getSteamApiMatchReplayKey());
+        replay.setMatch(MatchDtoMapper.convertDtoToEntity(replayDto.getMatch()));
 
-        replayRepository.save(replay);
+        replayRepository.update(replay);
     }
 
     public void addReplay(ReplayDto replayDto) {
-        replayRepository.save(ReplayDtoMapper.convertDtoToEntity(replayDto));
+        replayRepository.create(ReplayDtoMapper.convertDtoToEntity(replayDto));
     }
 
-    public void addMatch(long id, MatchDto matchDto)
+    public void addMatch(Long id, MatchDto matchDto)
     {
         Replay replay = replayRepository.findById(id);
         replay.setMatch(MatchDtoMapper.convertDtoToEntity(matchDto));
-        replayRepository.save(replay);
+        replayRepository.create(replay);
     }
 }
