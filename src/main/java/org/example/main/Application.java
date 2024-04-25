@@ -19,8 +19,5 @@ import java.sql.SQLException;
 public class Application {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext("org.example.main");
-        MatchRepository matchRepository = context.getBean(MatchRepository.class);
-        var match =  matchRepository.fetchMatchesWithLazyAssociationsCriteriaApi();
-        System.out.println("a");
     }
 }
