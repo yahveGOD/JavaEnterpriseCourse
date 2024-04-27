@@ -10,8 +10,7 @@ public class TalentTreeDtoMapper {
         return TalentTreeDto.builder()
                 .hero(HeroDtoMapper.convertEntityToDto(source.getHero()))
                 .id(source.getId())
-                .talentRight(source.getTalentRight())
-                .talentLeft(source.getTalentLeft())
+                .talentBranch(source.getTalentBranch())
                 .levelRequired(source.getLevelRequired())
                 .build();
     }
@@ -20,8 +19,7 @@ public class TalentTreeDtoMapper {
     {
         return TalentTree.builder()
                 .hero(HeroDtoMapper.convertDtoToEntity(source.getHero()))
-                .talentRight(source.getTalentRight())
-                .talentLeft(source.getTalentLeft())
+                .talentBranch(source.getTalentBranch())
                 .levelRequired(source.getLevelRequired())
                 .build();
     }

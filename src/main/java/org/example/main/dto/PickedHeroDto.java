@@ -1,6 +1,10 @@
 package org.example.main.dto;
 
+import jakarta.persistence.*;
 import lombok.*;
+import org.example.main.entity.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -8,9 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PickedHeroDto {
-    private HeroDto hero;
+    private List<HeroDto> heroes;
     private UserDto user;
-    private MatchDto match;
+    private List<MatchDto> matches;
     private StatisticsDto statistics;
     private InventoryDto inventory;
 }

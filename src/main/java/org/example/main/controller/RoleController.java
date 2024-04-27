@@ -29,13 +29,13 @@ public class RoleController {
         roleService.addRole(roleDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         roleService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         RoleDto roleDto = jsonMapper.convertFromJsonString(jsonString, RoleDto.class);
         roleService.update(id, roleDto);
     }

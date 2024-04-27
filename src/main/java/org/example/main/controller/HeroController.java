@@ -30,13 +30,13 @@ public class HeroController {
         heroService.addHero(heroDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         heroService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         HeroDto heroDto = jsonMapper.convertFromJsonString(jsonString, HeroDto.class);
         heroService.update(id, heroDto);
     }

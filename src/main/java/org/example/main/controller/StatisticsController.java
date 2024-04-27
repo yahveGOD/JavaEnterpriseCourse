@@ -29,13 +29,13 @@ public class StatisticsController {
         statisticsService.addStatistics(statisticsDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
         statisticsService.delete(id);
 
     }
 
     @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") int id, String jsonString) {
+    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
         StatisticsDto statisticsDto = jsonMapper.convertFromJsonString(jsonString, StatisticsDto.class);
         statisticsService.update(id, statisticsDto);
     }

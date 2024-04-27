@@ -15,6 +15,9 @@ public class UserDtoMapper {
                 .description(source.getDescription())
                 .password(source.getPassword())
                 .steamApiKey(source.getSteamApiKey())
+                .roles(source.getRoles().stream().map(RoleDtoMapper::convertEntityToDto).toList())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertEntityToDto).toList())
+                .pickedHeroes(source.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -26,6 +29,9 @@ public class UserDtoMapper {
                 .description(source.getDescription())
                 .password(source.getPassword())
                 .steamApiKey(source.getSteamApiKey())
+                .roles(source.getRoles().stream().map(RoleDtoMapper::convertDtoToEntity).toList())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList())
+                .pickedHeroes(source.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }

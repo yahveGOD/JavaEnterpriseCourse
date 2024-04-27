@@ -19,28 +19,27 @@ public class TalentTreeService {
         return talentTreeRepository.findAll().stream().map(TalentTreeDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        talentTreeRepository.deleteById(idInList);
+    public void delete(Long id) {
+        talentTreeRepository.deleteById(id);
     }
 
-    public void update(int idInList,TalentTreeDto talentTreeDto) {
-        TalentTree talentTree = talentTreeRepository.findById(idInList);
+    public void update(Long id,TalentTreeDto talentTreeDto) {
+        TalentTree talentTree = talentTreeRepository.findById(id);
 
-        talentTree.setTalentLeft((talentTreeDto.getTalentLeft()));
-        talentTree.setTalentRight(talentTreeDto.getTalentRight());
+        talentTree.setTalentBranch(talentTreeDto.getTalentBranch());
         talentTree.setLevelRequired(talentTreeDto.getLevelRequired());
 
-        talentTreeRepository.save(talentTree);
+        talentTreeRepository.update(talentTree);
     }
 
     public void addTalentTree(TalentTreeDto talentTreeDto) {
-        talentTreeRepository.save(TalentTreeDtoMapper.convertDtoToEntity(talentTreeDto));
+        talentTreeRepository.create(TalentTreeDtoMapper.convertDtoToEntity(talentTreeDto));
     }
 
-    public void addHero(long id, HeroDto heroDto)
+    public void addHero(Long id, HeroDto heroDto)
     {
         TalentTree talentTree = talentTreeRepository.findById(id);
         talentTree.setHero(HeroDtoMapper.convertDtoToEntity(heroDto));
-        talentTreeRepository.save(talentTree);
+        talentTreeRepository.create(talentTree);
     }
 }

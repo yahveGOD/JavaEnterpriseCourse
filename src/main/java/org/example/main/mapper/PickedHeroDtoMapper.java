@@ -9,8 +9,8 @@ public class PickedHeroDtoMapper {
     public static PickedHeroDto convertEntityToDto(PickedHero source)
     {
         return PickedHeroDto.builder()
-                .hero(HeroDtoMapper.convertEntityToDto(source.getHero()))
-                .match(MatchDtoMapper.convertEntityToDto(source.getMatch()))
+                .heroes(source.getHeroes().stream().map(HeroDtoMapper::convertEntityToDto).toList())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertEntityToDto).toList())
                 .user(UserDtoMapper.convertEntityToDto(source.getUser()))
                 .statistics(StatisticsDtoMapper.convertEntityToDto(source.getStatistics()))
                 .inventory(InventoryDtoMapper.convertEntityToDto(source.getInventory()))
@@ -20,8 +20,8 @@ public class PickedHeroDtoMapper {
     public static PickedHero convertDtoToEntity(PickedHeroDto source)
     {
         return PickedHero.builder()
-                .hero(HeroDtoMapper.convertDtoToEntity(source.getHero()))
-                .match(MatchDtoMapper.convertDtoToEntity(source.getMatch()))
+                .heroes(source.getHeroes().stream().map(HeroDtoMapper::convertDtoToEntity).toList())
+                .matches(source.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList())
                 .user(UserDtoMapper.convertDtoToEntity(source.getUser()))
                 .statistics(StatisticsDtoMapper.convertDtoToEntity(source.getStatistics()))
                 .inventory(InventoryDtoMapper.convertDtoToEntity(source.getInventory()))

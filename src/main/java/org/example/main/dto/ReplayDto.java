@@ -9,7 +9,7 @@ import org.example.main.dto.MatchDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReplayDto {
-    private long id;
-    private int steamApiMatchReplayKey;
+    private Long id;
+    private Long steamApiMatchReplayKey;
     private MatchDto match;
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.main.dto.RoleDto;
 import org.example.main.mapper.RoleDtoMapper;
 import org.example.main.entity.Role;
+import org.example.main.mapper.UserDtoMapper;
 import org.example.main.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +19,20 @@ public class RoleService {
         return roleRepository.findAll().stream().map(RoleDtoMapper::convertEntityToDto).toList();
     }
 
-    public void delete(int idInList) {
-        roleRepository.deleteById(idInList);
+    public void delete(Long id) {
+        roleRepository.deleteById(id);
     }
 
-    public void update(int idInList, RoleDto roleDto) {
-        Role role = roleRepository.findById(idInList);
+    public void update(Long id, RoleDto roleDto) {
+        Role role = roleRepository.findById(id);
 
         role.setTitle(roleDto.getTitle());
+        role.setUsers(roleDto.getUsers().stream().map(UserDtoMapper::convertDtoToEntity).toList());
 
-        roleRepository.save(role);
+        roleRepository.update(role);
     }
 
     public void addRole(RoleDto roleDto) {
-        roleRepository.save(RoleDtoMapper.convertDtoToEntity(roleDto));
+        roleRepository.create(RoleDtoMapper.convertDtoToEntity(roleDto));
     }
 }

@@ -1,6 +1,9 @@
 package org.example.main.dto;
 
 import lombok.*;
+import org.example.main.entity.Inventory;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +18,6 @@ public class ItemDto {
     private int boughtTimes;
     private String description;
     private String abilityDescription;
+    List<InventoryDto> inventoryList;
+
 }

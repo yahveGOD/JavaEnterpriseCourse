@@ -16,6 +16,7 @@ public class ItemDtoMapper {
                 .name(source.getName())
                 .useRate(source.getUseRate())
                 .winRate(source.getWinRate())
+                .inventoryList(source.getInventoryList().stream().map(InventoryDtoMapper::convertEntityToDto).toList())
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class ItemDtoMapper {
                 .name(source.getName())
                 .useRate(source.getUseRate())
                 .winRate(source.getWinRate())
+                .inventoryList(source.getInventoryList().stream().map(InventoryDtoMapper::convertDtoToEntity).toList())
                 .build();
     }
 }
