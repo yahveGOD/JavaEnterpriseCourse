@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.dto.creationDto.PickedHeroCreationDto;
 import org.example.main.entity.PickedHeroId;
 import org.example.main.mapper.HeroDtoMapper;
 import org.example.main.mapper.InventoryDtoMapper;
@@ -14,6 +15,7 @@ import org.example.main.repository.PickedHeroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PickedHeroService {
@@ -30,17 +32,29 @@ public class PickedHeroService {
 
     public void update(PickedHeroId pickedHeroId, PickedHeroDto pickedHeroDto) {
         PickedHero pickedHero = pickedHeroRepository.findByPickedHeroId(pickedHeroId);
-
-        pickedHero.setHeroes(pickedHeroDto.getHeroes().stream().map(HeroDtoMapper::convertDtoToEntity).toList());
-        pickedHero.setMatches(pickedHeroDto.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
-        pickedHero.setUser(UserDtoMapper.convertDtoToEntity(pickedHeroDto.getUser()));
-        pickedHero.setInventory(InventoryDtoMapper.convertDtoToEntity(pickedHeroDto.getInventory()));
-        pickedHero.setStatistics(StatisticsDtoMapper.convertDtoToEntity(pickedHeroDto.getStatistics()));
+        if (pickedHeroDto.getHeroes() != null)
+            pickedHero.setHeroes(pickedHeroDto.getHeroes().stream().map(HeroDtoMapper::convertDtoToEntity).toList());
+        if (pickedHeroDto.getMatches() != null)
+            pickedHero.setMatches(pickedHeroDto.getMatches().stream().map(MatchDtoMapper::convertDtoToEntity).toList());
+        if (pickedHeroDto.getUser() != null)
+            pickedHero.setUser(UserDtoMapper.convertDtoToEntity(pickedHeroDto.getUser()));
+        if (pickedHeroDto.getInventory() != null)
+            pickedHero.setInventory(InventoryDtoMapper.convertDtoToEntity(pickedHeroDto.getInventory()));
+        if (pickedHeroDto.getStatistics() != null)
+            pickedHero.setStatistics(StatisticsDtoMapper.convertDtoToEntity(pickedHeroDto.getStatistics()));
 
         pickedHeroRepository.update(pickedHero);
     }
 
+    public PickedHeroDto findByPickedHeroId(PickedHeroId pickedHeroId) {
+        return PickedHeroDtoMapper.convertEntityToDto(pickedHeroRepository.findByPickedHeroId(pickedHeroId));
+    }
+
     public void addPickedHero(PickedHeroDto pickedHeroDto) {
         pickedHeroRepository.create(PickedHeroDtoMapper.convertDtoToEntity(pickedHeroDto));
+    }
+
+    public void addPickedHero(PickedHeroCreationDto pickedHeroDto) {
+        pickedHeroRepository.create(PickedHeroDtoMapper.buildEntity(pickedHeroDto));
     }
 }

@@ -24,8 +24,6 @@ public class GameModeRepository extends AbstractHibernateRepository<GameMode>{
     {
         super(GameMode.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<GameMode> findGameModesByName(String name)  {
         Query query = entityManager.createQuery("SELECT g FROM GameMode g WHERE g.name = :name");

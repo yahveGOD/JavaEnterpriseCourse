@@ -1,9 +1,6 @@
 package org.example.main.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +13,7 @@ import org.hibernate.type.SqlTypes;
 
 @Getter
 @Setter
+@Entity
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +25,10 @@ public class TalentTree extends BaseEntity{
     @Column(name = "level_required")
     private Integer levelRequired;
 
+//    @Column(name = "cells")
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    private TalentBranch talentBranch;
+
     @Column(name = "cells")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private TalentBranch talentBranch;
+    private String cells;
 }

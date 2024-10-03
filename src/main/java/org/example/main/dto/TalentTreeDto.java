@@ -10,8 +10,9 @@ import org.example.main.entity.TalentBranch;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TalentTreeDto {
-    private long id;
+    private Long id;
     private HeroDto hero;
-    private int levelRequired;
-    private TalentBranch talentBranch;
+    private Integer levelRequired;
+    //private TalentBranch talentBranch;
+    private String cells;
 }

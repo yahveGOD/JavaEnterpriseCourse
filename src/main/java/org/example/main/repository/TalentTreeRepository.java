@@ -17,8 +17,6 @@ public class TalentTreeRepository extends AbstractHibernateRepository<TalentTree
     {
         super(TalentTree.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<TalentTree> fetchTalentTreesWithLazyAssociationsJPQL() {
         String jpql = "SELECT tt FROM talant_tree tt LEFT JOIN FETCH tt.hero";

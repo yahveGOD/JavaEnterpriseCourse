@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.dto.creationDto.InventoryCreationDto;
 import org.example.main.dto.InventoryDto;
 import org.example.main.mapper.InventoryDtoMapper;
 import org.example.main.entity.Inventory;
@@ -26,15 +27,25 @@ public class InventoryService {
 
     public void update(Long id, InventoryDto inventoryDto) {
         Inventory inventory = inventoryRepository.findById(id);
-
-        inventory.setBuildEffectivity(inventoryDto.getBuildEffectivity());
-        inventory.setItems(inventoryDto.getItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
-        inventory.setPickedHeroes(inventoryDto.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
+        if (inventoryDto.getBuildEffectivity() >= 0)
+            inventory.setBuildEffectivity(inventoryDto.getBuildEffectivity());
+        if (inventoryDto.getItems() != null)
+            inventory.setItems(inventoryDto.getItems().stream().map(ItemDtoMapper::convertDtoToEntity).toList());
+        if (inventoryDto.getPickedHeroes() != null)
+            inventory.setPickedHeroes(inventoryDto.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
 
         inventoryRepository.update(inventory);
     }
 
     public void addInventory(InventoryDto inventoryDto) {
         inventoryRepository.create(InventoryDtoMapper.convertDtoToEntity(inventoryDto));
+    }
+
+    public void addInventory(InventoryCreationDto inventoryDto) {
+        inventoryRepository.create(InventoryDtoMapper.buildEntity(inventoryDto));
+    }
+
+    public InventoryDto findById(Long id) {
+        return InventoryDtoMapper.convertEntityToDto(inventoryRepository.findById(id));
     }
 }

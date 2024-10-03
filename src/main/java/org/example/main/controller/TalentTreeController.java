@@ -18,28 +18,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/talent_tree")
+@RequestMapping("api/v1/talent_tree")
 @RequiredArgsConstructor
 public class TalentTreeController {
     private final TalentTreeService talentTreeService;
     private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(String jsonString) {
-        TalentTreeDto talentTreeDto = jsonMapper.convertFromJsonString(jsonString, TalentTreeDto.class);
+    public void create(@RequestBody TalentTreeDto talentTreeDto) {
         talentTreeService.addTalentTree(talentTreeDto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         talentTreeService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        TalentTreeDto talentTreeDto = jsonMapper.convertFromJsonString(jsonString, TalentTreeDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, TalentTreeDto talentTreeDto) {
         talentTreeService.update(id, talentTreeDto);
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(talentTreeService.findById(id));
+        return json;
     }
 
     @GetMapping("/all")

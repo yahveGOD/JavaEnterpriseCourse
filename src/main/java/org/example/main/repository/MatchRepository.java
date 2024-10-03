@@ -16,8 +16,6 @@ public class MatchRepository extends AbstractHibernateRepository<Match>{
     {
         super(Match.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<Match> findMatchesByRadiantKills(Long radiantKills) {
         Query query = entityManager.createQuery("SELECT m FROM Match m WHERE m.radiantKills = :radiantKills");

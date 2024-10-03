@@ -23,8 +23,6 @@ public class HeroRepository extends AbstractHibernateRepository<Hero>{
     {
         super(Hero.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<Hero> findHeroesByName(String name) {
         Query query = entityManager.createQuery("SELECT h FROM Hero h WHERE h.name = :name");

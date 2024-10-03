@@ -20,27 +20,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/picked_hero")
+@RequestMapping("api/v1/picked_hero")
 @RequiredArgsConstructor
 public class PickedHeroController {
     private final PickedHeroService pickedHeroService;
     private final JsonMapper jsonMapper;
     @PostMapping("/create")
-    public void create(String jsonString) {
-        PickedHeroDto pickedHeroDto = jsonMapper.convertFromJsonString(jsonString, PickedHeroDto.class);
+    public void create(@RequestBody PickedHeroDto pickedHeroDto) {
         pickedHeroService.addPickedHero(pickedHeroDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         pickedHeroService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "pickedHeroId")PickedHeroId pickedHeroId, String jsonString) {
-
-        PickedHeroDto pickedHeroDto = jsonMapper.convertFromJsonString(jsonString, PickedHeroDto.class);
-
+    @PostMapping("edit/{id}")
+    public void editUpdate(@PathVariable(value = "pickedHeroId")PickedHeroId pickedHeroId, PickedHeroDto pickedHeroDto) {
         pickedHeroService.update(pickedHeroId, pickedHeroDto);
     }
 

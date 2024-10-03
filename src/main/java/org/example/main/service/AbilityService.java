@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.dto.creationDto.AbilityCreationDto;
 import org.example.main.dto.AbilityDto;
 import org.example.main.dto.HeroDto;
 import org.example.main.mapper.AbilityDtoMapper;
@@ -15,36 +16,48 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AbilityService {
     private final AbilityRepository abilityRepository;
+
     public List<AbilityDto> findAll() {
-        return abilityRepository.findAll().stream().map(AbilityDtoMapper::convertEntityToDto).toList();
+        return abilityRepository.findAll().stream()
+                .map(AbilityDtoMapper::convertEntityToDto)
+                .toList();
     }
-    public AbilityDto findById(long id) {
-        return  AbilityDtoMapper.convertEntityToDto(abilityRepository.findById(id));
+
+    public AbilityDto findById(Long id) {
+        return AbilityDtoMapper.convertEntityToDto(abilityRepository.findById(id));
     }
+
     public void delete(long id) {
         abilityRepository.deleteById(id);
     }
-    public void update(long id,AbilityDto abilityDto) {
+
+    public void update(long id, AbilityDto abilityDto) {
         Ability ability = abilityRepository.findById(id);
 
-        if(abilityDto.getName()!= null)
+        if (abilityDto.getName() != null)
             ability.setName(abilityDto.getName());
         ability.setIsPassive(abilityDto.getIsPassive());
-        if(abilityDto.getDescription()!= null)
+        if (abilityDto.getDescription() != null)
             ability.setDescription(abilityDto.getDescription());
-        if(abilityDto.getFixedDamage()>0)
+        if (abilityDto.getFixedDamage() != null)
             ability.setFixedDamage(abilityDto.getFixedDamage());
-        if(abilityDto.getDamageType() != null)
+        if (abilityDto.getDamageType() != null)
             ability.setDamageType(abilityDto.getDamageType());
-        ability.setHero(HeroDtoMapper.convertDtoToEntity(abilityDto.getHero()));
+        if (abilityDto.getHero() != null)
+            ability.setHero(HeroDtoMapper.convertDtoToEntity(abilityDto.getHero()));
 
         abilityRepository.update(ability);
     }
+
     public void addAbility(AbilityDto abilityDto) {
         abilityRepository.create(AbilityDtoMapper.convertDtoToEntity(abilityDto));
     }
-    public void addHero(long id,HeroDto heroDto)
-    {
+
+    public void addAbility(AbilityCreationDto abilityDto) {
+        abilityRepository.create(AbilityDtoMapper.buildEntity(abilityDto));
+    }
+
+    public void addHero(long id, HeroDto heroDto) {
         Ability ability = abilityRepository.findById(id);
         ability.setHero(HeroDtoMapper.convertDtoToEntity(heroDto));
         abilityRepository.create(ability);

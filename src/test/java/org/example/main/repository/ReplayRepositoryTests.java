@@ -5,11 +5,13 @@ import org.example.main.configuration.LiquibaseConfig;
 import org.example.main.entity.GameMode;
 import org.example.main.entity.Match;
 import org.example.main.entity.Replay;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Time;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -51,9 +52,9 @@ public class ReplayRepositoryTests {
 
         List<Replay> testReplay = replayRepository.fetchReplaysWithLazyAssociationsJPQL();
 
-        Assert.assertNotNull(testReplay);
-        assertEquals(3,testReplay.size());
-        assertEquals(match.getRadiantKills(),testReplay.get(2).getMatch().getRadiantKills());
+        Assertions.assertNotNull(testReplay);
+        Assertions.assertEquals(3,testReplay.size());
+        Assertions.assertEquals(match.getRadiantKills(),testReplay.get(2).getMatch().getRadiantKills());
     }
 
     @Test
@@ -90,8 +91,8 @@ public class ReplayRepositoryTests {
 
         List<Replay> testReplay = replayRepository.findReplaysBySteamApi(replay1.getSteamApiMatchReplayKey());
 
-        assertEquals(1, testReplay.size());
-        assertEquals(testReplay.stream().allMatch(t -> t.getSteamApiMatchReplayKey().equals(replay1.getSteamApiMatchReplayKey())), true);
+        Assertions.assertEquals(1, testReplay.size());
+        Assertions.assertEquals(testReplay.stream().allMatch(t -> t.getSteamApiMatchReplayKey().equals(replay1.getSteamApiMatchReplayKey())), true);
     }
 
 

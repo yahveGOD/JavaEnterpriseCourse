@@ -4,20 +4,20 @@ import org.example.main.configuration.HibernateConfig;
 import org.example.main.configuration.LiquibaseConfig;
 import org.example.main.entity.Ability;
 import org.example.main.entity.Hero;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -54,9 +54,8 @@ public class AbilityRepositoryTests {
         abilityRepository.create(ability1);
 
         List<Ability> testAbility = abilityRepository.findAbilitiesByName(ability.getName());
-
-        Assert.assertNotNull(testAbility);
-        assertEquals(testAbility.stream().allMatch(t -> t.getName().equals(ability.getName())),true);
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertTrue(testAbility.stream().allMatch(t -> t.getName().equals(ability.getName())));
     }
 
     @Test
@@ -87,8 +86,8 @@ public class AbilityRepositoryTests {
 
         List<Ability> testAbility = abilityRepository.findAbilitiesByName(ability.getDamageType());
 
-        Assert.assertNotNull(testAbility);
-        assertEquals(testAbility.stream().allMatch(t -> t.getDamageType().equals(ability.getDamageType())),true);
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertTrue(testAbility.stream().allMatch(t -> t.getDamageType().equals(ability.getDamageType())));
     }
 
     @Test
@@ -127,10 +126,10 @@ public class AbilityRepositoryTests {
 
         List<Ability> testAbility = abilityRepository.fetchAbilitiesWithLazyAssociationsJPQL();
 
-        Assert.assertNotNull(testAbility);
-        assertEquals(11,testAbility.size());
-        assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
-        assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(11,testAbility.size());
+        Assertions.assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
+        Assertions.assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
     }
 
     @Test
@@ -169,10 +168,10 @@ public class AbilityRepositoryTests {
 
         List<Ability> testAbility = abilityRepository.fetchAbilitiesWithLazyAssociationsCriteriaApi();
 
-        Assert.assertNotNull(testAbility);
-        assertEquals(11,testAbility.size());
-        assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
-        assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(11,testAbility.size());
+        Assertions.assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
+        Assertions.assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
     }
 
     @Test
@@ -211,10 +210,10 @@ public class AbilityRepositoryTests {
 
         List<Ability> testAbility = abilityRepository.fetchAbilitiesWithLazyAssociationsEntityGraph();
 
-        Assert.assertNotNull(testAbility);
-        assertEquals(11,testAbility.size());
-        assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
-        assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(11,testAbility.size());
+        Assertions.assertEquals(hero.getName(),testAbility.get(9).getHero().getName());
+        Assertions.assertEquals(hero.getName(),testAbility.get(10).getHero().getName());
     }
 
 }

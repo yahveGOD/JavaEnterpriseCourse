@@ -18,26 +18,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("api/v1/role")
 @RequiredArgsConstructor
 public class RoleController {
     private final RoleService roleService;
     private final JsonMapper jsonMapper;
     @PostMapping("/create")
-    public void create(String jsonString) {
-        RoleDto roleDto = jsonMapper.convertFromJsonString(jsonString, RoleDto.class);
+    public void create(@RequestBody RoleDto roleDto) {
         roleService.addRole(roleDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         roleService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        RoleDto roleDto = jsonMapper.convertFromJsonString(jsonString, RoleDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id,RoleDto roleDto) {
         roleService.update(id, roleDto);
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(roleService.findById(id));
+        return json;
     }
 
     @GetMapping("/all")

@@ -21,8 +21,7 @@ public class ItemRepository extends AbstractHibernateRepository<Item>{
     {
         super(Item.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
+
     public List<Item> findItemsByName(String name) {
         Query query = entityManager.createQuery("SELECT i FROM Item i WHERE i.name = :name");
         query.setParameter("name", name);

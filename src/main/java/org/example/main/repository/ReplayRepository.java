@@ -16,8 +16,6 @@ public class ReplayRepository extends AbstractHibernateRepository<Replay> {
     {
         super(Replay.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
     public List<Replay> findReplaysBySteamApi(Long steamApiKey) {
         Query query = entityManager.createQuery("SELECT r FROM Replay r WHERE r.steamApiMatchReplayKey = :steam_api");
         query.setParameter("steam_api", steamApiKey);

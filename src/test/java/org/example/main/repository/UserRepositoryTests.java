@@ -6,11 +6,14 @@ import org.example.main.entity.Ability;
 import org.example.main.entity.Hero;
 import org.example.main.entity.Role;
 import org.example.main.entity.User;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -52,8 +54,8 @@ public class UserRepositoryTests {
 
         List<User> testUser = userRepository.findUsersByName(user.getName());
 
-        Assert.assertNotNull(testUser);
-        assertEquals(testUser.stream().allMatch(t -> t.getName().equals(user.getName())),true);
+        Assertions.assertNotNull(testUser);
+        Assertions.assertEquals(testUser.stream().allMatch(t -> t.getName().equals(user.getName())),true);
     }
 
 }

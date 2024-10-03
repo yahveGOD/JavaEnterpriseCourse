@@ -1,6 +1,7 @@
 package org.example.main.mapper;
 
 import lombok.experimental.UtilityClass;
+import org.example.main.dto.creationDto.ItemCreationDto;
 import org.example.main.dto.ItemDto;
 import org.example.main.entity.Item;
 
@@ -30,6 +31,17 @@ public class ItemDtoMapper {
                 .useRate(source.getUseRate())
                 .winRate(source.getWinRate())
                 .inventoryList(source.getInventoryList().stream().map(InventoryDtoMapper::convertDtoToEntity).toList())
+                .build();
+    }
+
+    public static Item buildEntity(ItemCreationDto source){
+        return Item.builder()
+                .abilityDescription(source.getDescription())
+                .boughtTimes(source.getBoughtTimes())
+                .name(source.getName())
+                .abilityDescription(source.getAbilityDescription())
+                .winRate(source.getWinRate())
+                .useRate(source.getUseRate())
                 .build();
     }
 }

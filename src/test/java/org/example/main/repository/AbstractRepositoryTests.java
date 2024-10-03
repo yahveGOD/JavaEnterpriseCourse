@@ -8,23 +8,24 @@ import org.example.main.entity.Ability;
 import org.example.main.entity.Hero;
 
 import org.hibernate.annotations.Source;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
 import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -52,8 +53,8 @@ public class AbstractRepositoryTests {
 
         Ability testAbility = abilityRepository.findById(ability.getId());
 
-        Assert.assertNotNull(testAbility);
-        assertEquals(ability.getName(), testAbility.getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(ability.getName(), testAbility.getName());
     }
 
     @Test
@@ -73,8 +74,8 @@ public class AbstractRepositoryTests {
 
         List<Ability> testAbilities = abilityRepository.findAll();
 
-        Assert.assertNotNull(testAbilities);
-        Assert.assertFalse(testAbilities.isEmpty());
+        Assertions.assertNotNull(testAbilities);
+        Assertions.assertFalse(testAbilities.isEmpty());
     }
 
     @Test
@@ -94,14 +95,14 @@ public class AbstractRepositoryTests {
 
         Ability testAbility = abilityRepository.findById(ability.getId());
 
-        Assert.assertNotNull(testAbility);
-        Assert.assertEquals(ability.getName(), testAbility.getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(ability.getName(), testAbility.getName());
 
         abilityRepository.deleteById(ability.getId());
 
         testAbility = abilityRepository.findById(ability.getId());
 
-        Assert.assertNull(testAbility);
+        Assertions.assertNull(testAbility);
     }
 
     @Test
@@ -126,9 +127,9 @@ public class AbstractRepositoryTests {
 
         Ability testAbility = abilityRepository.findById(ability.getId());
 
-        Assert.assertNotNull(testAbility);
-        Assert.assertEquals(testAbility.getName(), newName);
-        Assert.assertEquals(testAbility.getName(),ability.getName());
+        Assertions.assertNotNull(testAbility);
+        Assertions.assertEquals(testAbility.getName(), newName);
+        Assertions.assertEquals(testAbility.getName(),ability.getName());
     }
 
 }

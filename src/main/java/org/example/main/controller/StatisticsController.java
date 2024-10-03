@@ -18,25 +18,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statistics")
+@RequestMapping("api/v1/statistics")
 @RequiredArgsConstructor
 public class StatisticsController {
     private final StatisticsService statisticsService;
     private final JsonMapper jsonMapper;
     @PostMapping("/create")
-    public void create(String jsonString) {
-        StatisticsDto statisticsDto = jsonMapper.convertFromJsonString(jsonString, StatisticsDto.class);
+    public void create(@RequestBody StatisticsDto statisticsDto) {
         statisticsService.addStatistics(statisticsDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         statisticsService.delete(id);
 
     }
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(statisticsService.findById(id));
+        return json;
+    }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        StatisticsDto statisticsDto = jsonMapper.convertFromJsonString(jsonString, StatisticsDto.class);
+
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, StatisticsDto statisticsDto) {
         statisticsService.update(id, statisticsDto);
     }
 

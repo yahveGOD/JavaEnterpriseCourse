@@ -5,11 +5,13 @@ import org.example.main.configuration.LiquibaseConfig;
 import org.example.main.entity.GameMode;
 import org.example.main.entity.Item;
 import org.example.main.entity.Match;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +21,8 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -61,8 +62,8 @@ public class MatchRepositoryTests {
         matchRepository.create(match);
         List<Match> testMatch = matchRepository.findMatchesByRadiantKills(match1.getRadiantKills());
 
-        assertEquals(2, testMatch.size());
-        assertEquals(testMatch.stream().allMatch(t -> t.getRadiantKills().equals(match1.getRadiantKills())), true);
+        Assertions.assertEquals(2, testMatch.size());
+        Assertions.assertEquals(testMatch.stream().allMatch(t -> t.getRadiantKills().equals(match1.getRadiantKills())), true);
     }
 
     @Test
@@ -90,10 +91,10 @@ public class MatchRepositoryTests {
 
         List<Match> testMatch = matchRepository.fetchMatchesWithLazyAssociationsCriteriaApi();
 
-        Assert.assertNotNull(testMatch);
-        assertEquals(4,testMatch.size());
-        assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
-        assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
+        Assertions.assertNotNull(testMatch);
+        Assertions.assertEquals(4,testMatch.size());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
     }
 
     @Test
@@ -126,10 +127,10 @@ public class MatchRepositoryTests {
 
         List<Match> testMatch = matchRepository.fetchMatchesWithLazyAssociationsEntityGraph();
 
-        Assert.assertNotNull(testMatch);
-        assertEquals(4,testMatch.size());
-        assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
-        assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
+        Assertions.assertNotNull(testMatch);
+        Assertions.assertEquals(4,testMatch.size());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
     }
 
 
@@ -163,10 +164,10 @@ public class MatchRepositoryTests {
 
         List<Match> testMatch = matchRepository.fetchMatchesWithLazyAssociationsJPQL();
 
-        Assert.assertNotNull(testMatch);
-        assertEquals(4,testMatch.size());
-        assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
-        assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
+        Assertions.assertNotNull(testMatch);
+        Assertions.assertEquals(4,testMatch.size());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(2).getGameMode().getName());
+        Assertions.assertEquals(gameMode.getName(),testMatch.get(3).getGameMode().getName());
     }
 
 }

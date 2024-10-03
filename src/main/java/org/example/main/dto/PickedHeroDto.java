@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PickedHeroDto {
+    private PickedHeroId pickedHeroId;
     private List<HeroDto> heroes;
     private UserDto user;
     private List<MatchDto> matches;

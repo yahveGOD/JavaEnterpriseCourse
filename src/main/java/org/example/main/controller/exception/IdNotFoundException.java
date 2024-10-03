@@ -1,7 +1,7 @@
-package org.example.main.exception;
+package org.example.main.controller.exception;
 
 public class IdNotFoundException extends RuntimeException {
-    public IdNotFoundException(long id) {
+    public IdNotFoundException(Long id) {
             super(id + " not found.");
     }
 }

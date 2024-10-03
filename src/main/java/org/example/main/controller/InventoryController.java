@@ -18,27 +18,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventory")
+@RequestMapping("api/v1/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
     private final InventoryService inventoryService;
     private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(String jsonString) {
-        InventoryDto inventoryDto = jsonMapper.convertFromJsonString(jsonString, InventoryDto.class);
+    public void create(@RequestBody InventoryDto inventoryDto) {
         inventoryService.addInventory(inventoryDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         inventoryService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        InventoryDto inventoryDto = jsonMapper.convertFromJsonString(jsonString, InventoryDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id,InventoryDto inventoryDto) {
         inventoryService.update(id, inventoryDto);
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(inventoryService.findById(id));
+        return json;
     }
 
     @GetMapping("/all")

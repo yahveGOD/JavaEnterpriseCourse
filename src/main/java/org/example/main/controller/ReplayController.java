@@ -18,26 +18,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/replay")
+@RequestMapping("api/v1/replay")
 @RequiredArgsConstructor
 public class ReplayController {
     private final ReplayService replayService;
     private final JsonMapper jsonMapper;
     @PostMapping("/create")
-    public void create(String jsonString) {
-        ReplayDto replayDto = jsonMapper.convertFromJsonString(jsonString, ReplayDto.class);
+    public void create(@RequestBody ReplayDto replayDto) {
         replayService.addReplay(replayDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         replayService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        ReplayDto replayDto = jsonMapper.convertFromJsonString(jsonString, ReplayDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, ReplayDto replayDto) {
         replayService.update(id, replayDto);
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(replayService.findById(id));
+        return json;
     }
 
     @GetMapping("/all")

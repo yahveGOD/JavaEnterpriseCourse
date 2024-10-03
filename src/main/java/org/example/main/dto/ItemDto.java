@@ -18,6 +18,6 @@ public class ItemDto {
     private int boughtTimes;
     private String description;
     private String abilityDescription;
-    List<InventoryDto> inventoryList;
+    private List<InventoryDto> inventoryList;
 
 }

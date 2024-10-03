@@ -5,20 +5,21 @@ import org.example.main.configuration.LiquibaseConfig;
 import org.example.main.entity.Ability;
 import org.example.main.entity.GameMode;
 import org.example.main.entity.Hero;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -49,8 +50,8 @@ public class GameModeRepositoryTests {
 
         List<GameMode> testGameMode = gameModeRepository.findGameModesByName(gameMode1.getName());
 
-        assertEquals(2,testGameMode.size());
-        assertEquals(testGameMode.stream().allMatch(t -> t.getName().equals(gameMode1.getName())),gameMode1.getName() == gameMode1.getName());
+        Assertions.assertEquals(2,testGameMode.size());
+        Assertions.assertEquals(testGameMode.stream().allMatch(t -> t.getName().equals(gameMode1.getName())),gameMode1.getName() == gameMode1.getName());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class GameModeRepositoryTests {
 
         List<GameMode> testGameMode = gameModeRepository.findGameModesByNumberOfPLayers(gameMode1.getNumberOfPLayers());
 
-        assertEquals(1,testGameMode.size());
-        assertEquals(testGameMode.stream().allMatch(t -> t.getNumberOfPLayers().equals(gameMode1.getNumberOfPLayers())),true);
+        Assertions.assertEquals(1,testGameMode.size());
+        Assertions.assertEquals(testGameMode.stream().allMatch(t -> t.getNumberOfPLayers().equals(gameMode1.getNumberOfPLayers())),true);
     }
 }

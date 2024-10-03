@@ -15,26 +15,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ability")
+@RequestMapping("api/v1/ability")
 @RequiredArgsConstructor
 public class AbilityController {
     private final AbilityService abilityService;
     private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(String jsonString) {
-            AbilityDto abilityDto = jsonMapper.convertFromJsonString(jsonString, AbilityDto.class);
-            abilityService.addAbility(abilityDto);
+    public void create(@RequestBody AbilityDto abilityDto) {
+        abilityService.addAbility(abilityDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         abilityService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-            AbilityDto abilityDto = jsonMapper.convertFromJsonString(jsonString, AbilityDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, AbilityDto abilityDto) {
             abilityService.update(id, abilityDto);
     }
 
@@ -43,8 +41,8 @@ public class AbilityController {
         String json = jsonMapper.convertToJsonString(abilityService.findAll().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
         return json;
     }
-    @GetMapping("/id")
-    public String findById(@PathVariable Long id)
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
     {
         String json = jsonMapper.convertToJsonString(abilityService.findById(id));
         return json;

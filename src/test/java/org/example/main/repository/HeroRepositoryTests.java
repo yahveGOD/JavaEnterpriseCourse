@@ -4,19 +4,22 @@ import org.example.main.configuration.HibernateConfig;
 import org.example.main.configuration.LiquibaseConfig;
 import org.example.main.entity.GameMode;
 import org.example.main.entity.Hero;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {HibernateConfig.class, LiquibaseConfig.class},
         loader = AnnotationConfigContextLoader.class
@@ -52,8 +55,8 @@ public class HeroRepositoryTests {
         heroRepository.create(hero1);
         List<Hero> testHero = heroRepository.findHeroesByName(hero1.getName());
 
-        assertEquals(1, testHero.size());
-        assertEquals(testHero.stream().allMatch(t -> t.getName().equals(hero1.getName())), hero1.getName() == hero1.getName());
+        Assertions.assertEquals(1, testHero.size());
+        Assertions.assertEquals(testHero.stream().allMatch(t -> t.getName().equals(hero1.getName())), hero1.getName() == hero1.getName());
     }
 
     @Test
@@ -82,7 +85,7 @@ public class HeroRepositoryTests {
 
         List<Hero> testHero = heroRepository.findHeroesByWinRate(hero1.getWinRate());
 
-        assertEquals(2, testHero.size());
-        assertEquals(testHero.stream().allMatch(t -> t.getWinRate().equals(hero1.getWinRate())), true);
+        Assertions.assertEquals(2, testHero.size());
+        Assertions.assertEquals(testHero.stream().allMatch(t -> t.getWinRate().equals(hero1.getWinRate())), true);
     }
 }

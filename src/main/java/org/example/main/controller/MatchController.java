@@ -18,27 +18,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/match")
+@RequestMapping("api/v1/match")
 @RequiredArgsConstructor
 public class MatchController {
     private final MatchService matchService;
     private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(String jsonString) {
-        MatchDto matchDto = jsonMapper.convertFromJsonString(jsonString, MatchDto.class);
+    public void create(@RequestBody MatchDto matchDto) {
         matchService.addMatch(matchDto);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         matchService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        MatchDto matchDto = jsonMapper.convertFromJsonString(jsonString, MatchDto.class);
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, MatchDto matchDto) {
         matchService.update(id, matchDto);
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id)
+    {
+        String json = jsonMapper.convertToJsonString(matchService.findById(id));
+        return json;
     }
 
     @GetMapping("/all")

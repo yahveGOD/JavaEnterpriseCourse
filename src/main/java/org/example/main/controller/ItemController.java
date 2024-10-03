@@ -18,26 +18,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("api/v1/item")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
     private final JsonMapper jsonMapper;
 
     @PostMapping("/create")
-    public void create(String jsonString) {
-        ItemDto itemDto = jsonMapper.convertFromJsonString(jsonString, ItemDto.class);
+    public void create(@RequestBody ItemDto itemDto) {
         itemService.addItem(itemDto);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         itemService.delete(id);
 
     }
 
-    @PostMapping("/{id}/edit")
-    public void editUpdate(@PathVariable(value = "id") Long id, String jsonString) {
-        ItemDto itemDto = jsonMapper.convertFromJsonString(jsonString, ItemDto.class);
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id) {
+        String json = jsonMapper.convertToJsonString(itemService.findById(id));
+        return json;
+    }
+
+    @PutMapping("/edit/{id}")
+    public void editUpdate(@PathVariable("id") Long id, ItemDto itemDto) {
         itemService.update(id, itemDto);
     }
 
@@ -56,7 +61,7 @@ public class ItemController {
         }
     }
 
-    private String serializeToJson(List<Item> items){
+    private String serializeToJson(List<Item> items) {
         return jsonMapper.convertToJsonString(items);
     }
 }

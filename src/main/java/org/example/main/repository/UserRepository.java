@@ -16,8 +16,6 @@ public class UserRepository extends AbstractHibernateRepository<User>{
     {
         super(User.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<User> findUsersByName(String name) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

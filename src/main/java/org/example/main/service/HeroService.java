@@ -1,6 +1,7 @@
 package org.example.main.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.main.dto.creationDto.HeroCreationDto;
 import org.example.main.dto.HeroDto;
 import org.example.main.mapper.AbilityDtoMapper;
 import org.example.main.mapper.HeroDtoMapper;
@@ -26,16 +27,24 @@ public class HeroService {
 
     public void update(Long id, HeroDto heroDto) {
         Hero hero = heroRepository.findById(id);
-
-        hero.setName(heroDto.getName());
-        hero.setAgility(heroDto.getAgility());
-        hero.setIntelligence(heroDto.getIntelligence());
-        hero.setStrength(heroDto.getStrength());
-        hero.setPickedTimes(heroDto.getPickedTimes());
-        hero.setWinRate(heroDto.getWinRate());
-        hero.setPickRate(heroDto.getPickRate());
-        hero.setPickedHeroes(heroDto.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
-        hero.setAbilities(heroDto.getAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
+        if (heroDto.getName() != null)
+            hero.setName(heroDto.getName());
+        if (heroDto.getAgility() >= 0)
+            hero.setAgility(heroDto.getAgility());
+        if (heroDto.getIntelligence() >= 0)
+            hero.setIntelligence(heroDto.getIntelligence());
+        if (heroDto.getStrength() >= 0)
+            hero.setStrength(heroDto.getStrength());
+        if (heroDto.getPickedTimes() >= 0)
+            hero.setPickedTimes(heroDto.getPickedTimes());
+        if (heroDto.getWinRate() >= 0)
+            hero.setWinRate(heroDto.getWinRate());
+        if (heroDto.getPickRate() >= 0)
+            hero.setPickRate(heroDto.getPickRate());
+        if (heroDto.getPickedHeroes() != null)
+            hero.setPickedHeroes(heroDto.getPickedHeroes().stream().map(PickedHeroDtoMapper::convertDtoToEntity).toList());
+        if (heroDto.getAbilities() != null)
+            hero.setAbilities(heroDto.getAbilities().stream().map(AbilityDtoMapper::convertDtoToEntity).toList());
 
         heroRepository.update(hero);
     }
@@ -43,4 +52,13 @@ public class HeroService {
     public void addHero(HeroDto heroDto) {
         heroRepository.create(HeroDtoMapper.convertDtoToEntity(heroDto));
     }
+
+    public void addHero(HeroCreationDto heroDto) {
+        heroRepository.create(HeroDtoMapper.buildEntity(heroDto));
+    }
+
+    public HeroDto findById(Long id) {
+        return HeroDtoMapper.convertEntityToDto(heroRepository.findById(id));
+    }
+
 }

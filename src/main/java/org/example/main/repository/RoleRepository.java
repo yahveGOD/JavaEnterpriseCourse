@@ -16,8 +16,6 @@ public class RoleRepository extends AbstractHibernateRepository<Role> {
     {
         super(Role.class);
     }
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
 
     public List<Role> findRolesByTitle(String title) {
         Query query = entityManager.createQuery("SELECT r FROM Role r WHERE r.title = :title");

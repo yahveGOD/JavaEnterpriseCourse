@@ -14,8 +14,6 @@ import java.util.List;
 @Repository
 @Transactional
 public class AbilityRepository extends AbstractHibernateRepository<Ability>{
-    @PersistenceContext(unitName = "entityManagerFactory")
-    private EntityManager entityManager;
     public AbilityRepository()
     {
         super(Ability.class);

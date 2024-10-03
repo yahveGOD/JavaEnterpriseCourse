@@ -1,4 +1,4 @@
-package org.example.main.exception;
+package org.example.main.controller.exception;
 
 public class PickedHeroNotFoundException extends RuntimeException  {
     public PickedHeroNotFoundException() {
